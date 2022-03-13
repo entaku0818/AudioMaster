@@ -3,7 +3,7 @@ import XCTest
 
 final class AudioMasterTests: XCTestCase {
 
-    let audioMaster = AudioMaster()
+    var audioMaster = AudioMaster()
 
 
     func testExample() throws {
@@ -11,4 +11,11 @@ final class AudioMasterTests: XCTestCase {
         audioMaster.play()
         XCTAssertTrue(audioMaster.isPlayng())
     }
+
+    func testSetVolume() throws {
+        let volume: Float = 2.5
+        audioMaster.setVolume(volume: volume)
+        XCTAssertTrue(audioMaster.volume() == volume)
+    }
+
 }
