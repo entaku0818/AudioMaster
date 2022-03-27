@@ -5,17 +5,14 @@ import AVFoundation
 public struct AudioMaster {
     public private(set) var audioPlayer = AVAudioPlayer()
     public private(set) var audioRecorder = AVAudioRecorder()
-    public private(set) var audioSession = AVAudioSession.sharedInstance()
     public private(set) var isRecording = false
 
 
-    public init() {
-        let audioUrl:URL = URL(fileURLWithPath: "/Users/endo/AudioMaster/Sources/AudioMaster/20220309 084020.m4a")
-
+    public init(url:URL) {
 
 
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: audioUrl)
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
         } catch {
             print("error")
         }
@@ -26,6 +23,9 @@ public struct AudioMaster {
         audioPlayer.play()
     }
 
+    public func stop() {
+        audioPlayer.stop()
+    }
 
     public func isPlayng() -> Bool {
         return audioPlayer.isPlaying
@@ -40,28 +40,6 @@ public struct AudioMaster {
     }
 
 
-//    public mutating func record(){
-//
-//        try! audioSession.setCategory(.playAndRecord)
-//        try! audioSession.setActive(true)
-//        let settings = [
-//            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-//            AVSampleRateKey: 44100,
-//            AVNumberOfChannelsKey: 2,
-//            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-//        ]
-//        audioRecorder = try! AVAudioRecorder(url: getAudioFileUrl(), settings: settings)
-//        audioRecorder.record()
-//
-//    }
-//
-//    func getAudioFileUrl() -> URL {
-//        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-//        let docsDirect = paths[0]
-//        let audioUrl = docsDirect.appendingPathComponent("recording.m4a")
-//
-//        return audioUrl
-//    }
 }
 
 
