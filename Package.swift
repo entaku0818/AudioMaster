@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "AudioMaster",
+    platforms: [.iOS(.v13)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -23,6 +24,9 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "AudioMasterTests",
-            dependencies: ["AudioMaster"]),
+            dependencies: ["AudioMaster"],
+            resources: [
+                .copy("test.m4a")
+            ]),
     ]
 )
