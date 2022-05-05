@@ -33,17 +33,16 @@ final class AudioMasterTests: XCTestCase {
         XCTAssertTrue(!audioMaster.isPlayng())
     }
 
-    // 10秒間録音する
+    // 10秒間録音し、その結果を再生する
     func testRecordStart() throws {
-        audioMaster.record()
+        audioMaster.recordStart()
         let expectation = XCTestExpectation(description: "Your expectation")
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
             self?.audioMaster.recordStop()
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 20)
-        guard let url = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("recording.m4a") else { return }
-
+        guard let url = audioMaster.lastRecordAudioFile() else { return }
 
         audioMaster = AudioMaster(url: url)
         audioMaster.play()

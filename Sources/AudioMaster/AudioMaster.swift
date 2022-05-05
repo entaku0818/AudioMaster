@@ -7,20 +7,18 @@ public struct AudioMaster {
     public private(set) var audioPlayer = AVAudioPlayer()
     public private(set) var audioRecorder = AVAudioRecorder()
     public private(set) var isRecording = false
+    private var audioFileUrl:URL?
 
 
     public init(url:URL) {
-
-
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
         } catch {
             print("error")
         }
-
     }
 
-    /// AVAudioPlayer
+    /// AVAudioPlayer Method
     public func play() {
         audioPlayer.play()
     }
@@ -41,11 +39,12 @@ public struct AudioMaster {
         return audioPlayer.volume
     }
 
-    public mutating func record() -> Void {
+    /// AudioRecorder Method
+    public mutating func recordStart() -> Void {
         let session = AVAudioSession.sharedInstance()
 
         do {
-            try session.setCategory(.playAndRecord, mode: .default)
+            try session.setCategory(.record, mode: .default)
             try session.setActive(true)
 
             let settings = [
@@ -55,8 +54,9 @@ public struct AudioMaster {
                 AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
             ]
 
-            audioRecorder = try AVAudioRecorder(url: getAudioFilrUrl(), settings: settings)
-            audioRecorder.delegate = self as? AVAudioRecorderDelegate
+
+            audioRecorder = try AVAudioRecorder(url: getAudioFileUrl(), settings: settings)
+            audioFileUrl = getAudioFileUrl()
         } catch let error {
             print(error)
         }
@@ -67,10 +67,14 @@ public struct AudioMaster {
         audioRecorder.stop()
     }
 
-    public func getAudioFilrUrl() -> URL {
+    public func lastRecordAudioFile() -> URL? {
+        audioFileUrl
+    }
+
+    private func getAudioFileUrl() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let docsDirect = paths[0]
-        let audioUrl = docsDirect.appendingPathComponent("recording.m4a")
+        let audioUrl = docsDirect.appendingPathComponent("recording\(DateFormatter.yyyyMMddHHmmss.string(from: Date())).m4a")
 
         return audioUrl
     }
