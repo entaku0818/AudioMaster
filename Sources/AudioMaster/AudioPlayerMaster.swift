@@ -9,11 +9,13 @@ import AVFoundation
 
 public class AudioPlayerMaster {
     private var audioPlayer: AVAudioPlayer?
+    public private(set) var isPlaying: Bool = false
 
     public init() { }
 
     public func playAudioFromFile(named fileName: String) {
-        guard let audioFileURL = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
+
+        guard let audioFileURL = Bundle.module.url(forResource: fileName, withExtension: "mp3") else {
             print("Audio file not found.")
             return
         }
@@ -22,6 +24,7 @@ public class AudioPlayerMaster {
             audioPlayer = try AVAudioPlayer(contentsOf: audioFileURL)
             audioPlayer?.prepareToPlay()
             audioPlayer?.play()
+            isPlaying = true
         } catch {
             print("Error playing audio: \(error.localizedDescription)")
         }
@@ -29,6 +32,8 @@ public class AudioPlayerMaster {
 
     public func stopAudio() {
         audioPlayer?.stop()
+        isPlaying = false 
     }
 }
+
 

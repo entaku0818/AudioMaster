@@ -1,14 +1,12 @@
 //
-//  File.swift
+//  AudioRecorderMaster.swift
 //  
 //
 //  Created by 遠藤拓弥 on 10.9.2023.
 //
 
 import AVFoundation
-import AVFoundation
 
-@available(iOS 13.0.0, *)
 public class AudioRecorderMaster: NSObject {
     private var audioRecorder: AVAudioRecorder?
     private var recordingURL: URL?
@@ -21,8 +19,8 @@ public class AudioRecorderMaster: NSObject {
         let audioSession = AVAudioSession.sharedInstance()
 
         do {
-            try await audioSession.setCategory(.record, mode: .default, options: [])
-            try await audioSession.setActive(true)
+            try audioSession.setCategory(.record, mode: .default, options: [])
+            try audioSession.setActive(true)
         } catch {
             print("Error setting up audio session: \(error.localizedDescription)")
             throw error

@@ -2,22 +2,29 @@
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
-
 let package = Package(
     name: "AudioMaster",
+    platforms: [
+        .iOS(.v15) // iOS 13 以降
+    ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "AudioMaster",
             targets: ["AudioMaster"]),
     ],
+    
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "AudioMaster"),
+            name: "AudioMaster",
+            dependencies: [],
+            resources: [
+                .process("./Resources/audio.mp3")
+            ]
+        ),
         .testTarget(
             name: "AudioMasterTests",
-            dependencies: ["AudioMaster"]),
+            dependencies: ["AudioMaster"]
+        ),
     ]
 )
+
