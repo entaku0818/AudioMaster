@@ -7,6 +7,7 @@
 
 import Foundation
 import XCTest
+import AVFAudio
 @testable import AudioMaster
 
 class AudioRecorderMasterTests: XCTestCase {
@@ -14,7 +15,16 @@ class AudioRecorderMasterTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        audioRecorderMaster = AudioRecorderMaster()
+        let formatID = Int(kAudioFormatLinearPCM)
+        let audioQuality = AVAudioQuality.high.rawValue
+        let sampleRate = 44100.0
+        let numberOfChannels = 2
+
+        // AudioRecordingSettingsを作成
+        let recordingSettings = AudioRecordingSettings(formatID: formatID, audioQuality: audioQuality, sampleRate: sampleRate, numberOfChannels: numberOfChannels)
+
+        // AudioRecorderMasterを初期化
+        audioRecorderMaster = AudioRecorderMaster(settings: recordingSettings)
     }
 
     override func tearDown() {

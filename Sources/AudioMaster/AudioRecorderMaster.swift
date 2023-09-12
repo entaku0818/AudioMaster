@@ -7,11 +7,36 @@
 
 import AVFoundation
 
+public struct AudioRecordingSettings {
+    let formatID: Int
+    let audioQuality: Int
+    let sampleRate: Double
+    let numberOfChannels: Int
+
+    public init(formatID: Int, audioQuality: Int, sampleRate: Double, numberOfChannels: Int) {
+        self.formatID = formatID
+        self.audioQuality = audioQuality
+        self.sampleRate = sampleRate
+        self.numberOfChannels = numberOfChannels
+    }
+
+    public func asDictionary() -> [String: Any] {
+        return [
+            AVFormatIDKey: formatID,
+            AVEncoderAudioQualityKey: audioQuality,
+            AVSampleRateKey: sampleRate,
+            AVNumberOfChannelsKey: numberOfChannels
+        ]
+    }
+}
+
 public class AudioRecorderMaster: NSObject {
     private var audioRecorder: AVAudioRecorder?
     private var recordingURL: URL?
+    private let settings: AudioRecordingSettings
 
-    public override init() {
+    public init(settings: AudioRecordingSettings) {
+        self.settings = settings
         super.init()
     }
 
@@ -30,15 +55,8 @@ public class AudioRecorderMaster: NSObject {
         let recordingName = "audioRecording.wav"
         recordingURL = documentsDirectory.appendingPathComponent(recordingName)
 
-        let settings: [String: Any] = [
-            AVFormatIDKey: Int(kAudioFormatLinearPCM),
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue,
-            AVSampleRateKey: 44100.0,
-            AVNumberOfChannelsKey: 2
-        ]
-
         do {
-            audioRecorder = try AVAudioRecorder(url: recordingURL!, settings: settings)
+            audioRecorder = try AVAudioRecorder(url: recordingURL!, settings: settings.asDictionary())
             audioRecorder?.record()
         } catch {
             print("Error starting audio recording: \(error.localizedDescription)")
