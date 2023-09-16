@@ -31,6 +31,16 @@ class AudioPlayerMasterTests: XCTestCase {
         XCTAssertTrue(audioPlayer.isPlaying, "Audio should be playing.")
     }
 
+    func testPauseAudio() {
+        audioPlayer.playAudioFromFile(named: "audio")
+
+        sleep(1)
+
+        audioPlayer.pauseAudio()
+
+        XCTAssertFalse(audioPlayer.isPlaying, "Audio should be stopped.")
+    }
+
     func testStopAudio() {
         audioPlayer.playAudioFromFile(named: "audio")
 

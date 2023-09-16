@@ -30,6 +30,11 @@ public class AudioPlayerMaster {
         }
     }
 
+    public func pauseAudio() {
+        audioPlayer?.pause()
+        isPlaying = false
+    }
+
     public func stopAudio() {
         audioPlayer?.stop()
         isPlaying = false 
