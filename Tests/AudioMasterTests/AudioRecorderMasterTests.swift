@@ -19,9 +19,10 @@ class AudioRecorderMasterTests: XCTestCase {
         let audioQuality = AVAudioQuality.high.rawValue
         let sampleRate = 44100.0
         let numberOfChannels = 2
+        let fileName = "audioRecording.wav"
 
         // AudioRecordingSettingsを作成
-        let recordingSettings = AudioRecordingSettings(formatID: formatID, audioQuality: audioQuality, sampleRate: sampleRate, numberOfChannels: numberOfChannels)
+        let recordingSettings = AudioRecordingSettings(formatID: formatID, audioQuality: audioQuality, sampleRate: sampleRate, numberOfChannels: numberOfChannels, fileName: fileName)
 
         // AudioRecorderMasterを初期化
         audioRecorderMaster = AudioRecorderMaster(settings: recordingSettings)

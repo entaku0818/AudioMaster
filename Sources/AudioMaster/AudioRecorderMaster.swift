@@ -12,12 +12,14 @@ public struct AudioRecordingSettings {
     let audioQuality: Int
     let sampleRate: Double
     let numberOfChannels: Int
+    let fileName: String
 
-    public init(formatID: Int, audioQuality: Int, sampleRate: Double, numberOfChannels: Int) {
+    public init(formatID: Int, audioQuality: Int, sampleRate: Double, numberOfChannels: Int,fileName: String) {
         self.formatID = formatID
         self.audioQuality = audioQuality
         self.sampleRate = sampleRate
         self.numberOfChannels = numberOfChannels
+        self.fileName = fileName
     }
 
     public func asDictionary() -> [String: Any] {
@@ -44,7 +46,7 @@ public class AudioRecorderMaster: NSObject {
         let audioSession = AVAudioSession.sharedInstance()
 
         do {
-            try audioSession.setCategory(.record, mode: .default, options: [])
+            try audioSession.setCategory(.record, mode: .voicePrompt, options: [])
             try audioSession.setActive(true)
         } catch {
             print("Error setting up audio session: \(error.localizedDescription)")
