@@ -52,4 +52,15 @@ class AudioRecorderMasterTests: XCTestCase {
             XCTFail("Failed to stop recording: \(error.localizedDescription)")
         }
     }
+
+    func testPeakPower() async {
+        do {
+            let recordingURL = try await audioRecorderMaster.startRecording()
+            XCTAssertNotNil(recordingURL)
+            let peakPower = try await audioRecorderMaster.peakPower()
+            print("peakPower: \(peakPower)")
+        } catch {
+            XCTFail("Failed to start recording: \(error.localizedDescription)")
+        }
+    }
 }

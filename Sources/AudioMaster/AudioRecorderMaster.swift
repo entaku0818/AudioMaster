@@ -71,4 +71,9 @@ public class AudioRecorderMaster: NSObject {
     public func stopRecording() async throws {
         audioRecorder?.stop()
     }
+
+
+    public func peakPower() async throws {
+        audioRecorder?.peakPower(forChannel: 0)
+    }
 }
