@@ -46,7 +46,7 @@ public class AudioRecorderMaster: NSObject {
         let audioSession = AVAudioSession.sharedInstance()
 
         do {
-            try audioSession.setCategory(.record, mode: .voicePrompt, options: [])
+            try audioSession.setCategory(.record, mode: .default, options: [])
             try audioSession.setActive(true)
         } catch {
             print("Error setting up audio session: \(error.localizedDescription)")
@@ -54,7 +54,12 @@ public class AudioRecorderMaster: NSObject {
         }
 
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let recordingName = "audioRecording.wav"
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMddHHmmss"
+        let dateString = dateFormatter.string(from: date)
+        let recordingName = "audioRecording_\(dateString).wav"
+
         recordingURL = documentsDirectory.appendingPathComponent(recordingName)
 
         do {
