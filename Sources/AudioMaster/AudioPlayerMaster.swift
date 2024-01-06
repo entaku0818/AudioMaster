@@ -10,12 +10,24 @@ import AVFoundation
 public class AudioPlayerMaster {
     private var audioPlayer: AVAudioPlayer
 
+    public var volume: Float  {
+        return audioPlayer.volume
+    }
+
+    public var isPlaying: Bool  {
+        return audioPlayer.isPlaying
+    }
+
     public init(fileName: String) {
+        let audioSession = AVAudioSession.sharedInstance()
+
         guard let audioFileURL = Bundle.module.url(forResource: fileName, withExtension: "mp3") else {
             fatalError("Audio file not found.")
         }
 
         do {
+            try audioSession.setCategory(.playback, mode: .default, options: [])
+            try audioSession.setActive(true)
             audioPlayer = try AVAudioPlayer(contentsOf: audioFileURL)
             audioPlayer.prepareToPlay()
         } catch {
@@ -27,7 +39,6 @@ public class AudioPlayerMaster {
         audioPlayer.play()
     }
 
-
     public func pauseAudio() {
         audioPlayer.pause()
     }
@@ -36,8 +47,8 @@ public class AudioPlayerMaster {
         audioPlayer.stop()
     }
 
-    public func isPlayngAudio() -> Bool {
-        return audioPlayer.isPlaying
+    public func setVolume(_ volume: Float, fadeDuration duration: TimeInterval) {
+        audioPlayer.setVolume(volume, fadeDuration: duration)
     }
 }
 

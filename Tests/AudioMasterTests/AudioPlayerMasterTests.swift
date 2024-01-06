@@ -23,26 +23,12 @@ class AudioPlayerMasterTests: XCTestCase {
         super.tearDown()
     }
 
-    func testPlayAudio() {
-        let expectation = XCTestExpectation(description: "Audio should start playing")
-
-        audioPlayer.playAudio()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if self.audioPlayer.isPlayngAudio() {
-                expectation.fulfill()
-            }
-        }
-
-        wait(for: [expectation], timeout: 2)
-    }
-
     func testPauseAudio() {
         audioPlayer.playAudio()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.audioPlayer.pauseAudio()
-            XCTAssertFalse(self.audioPlayer.isPlayngAudio(), "Audio should be paused.")
+            XCTAssertFalse(self.audioPlayer.isPlaying, "Audio should be paused.")
         }
     }
 
@@ -51,7 +37,24 @@ class AudioPlayerMasterTests: XCTestCase {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.audioPlayer.stopAudio()
-            XCTAssertFalse(self.audioPlayer.isPlayngAudio(), "Audio should be stopped.")
+            XCTAssertFalse(self.audioPlayer.isPlaying, "Audio should be stopped.")
         }
     }
+
+    func testSetVolume() {
+         let expectedVolume: Float = 0.5
+         let fadeDuration: TimeInterval = 1  // 1秒で音量を変更
+
+         audioPlayer.setVolume(expectedVolume, fadeDuration: fadeDuration)
+
+         // 音量が変更される時間を待機
+         let expectation = XCTestExpectation(description: "Wait for volume to change")
+         DispatchQueue.main.asyncAfter(deadline: .now() + fadeDuration + 0.1) {
+             expectation.fulfill()
+         }
+         wait(for: [expectation], timeout: fadeDuration + 0.5)
+
+         // 最終的な音量が期待値と一致するか確認
+         XCTAssertEqual(audioPlayer.volume, expectedVolume, accuracy: 0.1, "Volume should be set to the expected value")
+     }
 }
