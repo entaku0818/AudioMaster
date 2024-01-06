@@ -14,7 +14,8 @@ class AudioPlayerMasterTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        audioPlayer = AudioPlayerMaster()
+        // Assuming "testAudio" is a valid file in your test bundle
+        audioPlayer = AudioPlayerMaster(fileName: "audio")
     }
 
     override func tearDown() {
@@ -22,32 +23,35 @@ class AudioPlayerMasterTests: XCTestCase {
         super.tearDown()
     }
 
-    func testPlayAudioFromFile() {
+    func testPlayAudio() {
+        let expectation = XCTestExpectation(description: "Audio should start playing")
 
-        audioPlayer.playAudioFromFile(named: "audio")
+        audioPlayer.playAudio()
 
-        sleep(5)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if self.audioPlayer.isPlayngAudio() {
+                expectation.fulfill()
+            }
+        }
 
-        XCTAssertTrue(audioPlayer.isPlaying, "Audio should be playing.")
+        wait(for: [expectation], timeout: 2)
     }
 
     func testPauseAudio() {
-        audioPlayer.playAudioFromFile(named: "audio")
+        audioPlayer.playAudio()
 
-        sleep(1)
-
-        audioPlayer.pauseAudio()
-
-        XCTAssertFalse(audioPlayer.isPlaying, "Audio should be stopped.")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.audioPlayer.pauseAudio()
+            XCTAssertFalse(self.audioPlayer.isPlayngAudio(), "Audio should be paused.")
+        }
     }
 
     func testStopAudio() {
-        audioPlayer.playAudioFromFile(named: "audio")
+        audioPlayer.playAudio()
 
-        sleep(1)
-
-        audioPlayer.stopAudio()
-
-        XCTAssertFalse(audioPlayer.isPlaying, "Audio should be stopped.")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.audioPlayer.stopAudio()
+            XCTAssertFalse(self.audioPlayer.isPlayngAudio(), "Audio should be stopped.")
+        }
     }
 }

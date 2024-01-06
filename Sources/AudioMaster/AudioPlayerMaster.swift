@@ -8,36 +8,36 @@
 import AVFoundation
 
 public class AudioPlayerMaster {
-    private var audioPlayer: AVAudioPlayer?
-    public private(set) var isPlaying: Bool = false
+    private var audioPlayer: AVAudioPlayer
 
-    public init() { }
-
-    public func playAudioFromFile(named fileName: String) {
-
+    public init(fileName: String) {
         guard let audioFileURL = Bundle.module.url(forResource: fileName, withExtension: "mp3") else {
-            print("Audio file not found.")
-            return
+            fatalError("Audio file not found.")
         }
 
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audioFileURL)
-            audioPlayer?.prepareToPlay()
-            audioPlayer?.play()
-            isPlaying = true
+            audioPlayer.prepareToPlay()
         } catch {
-            print("Error playing audio: \(error.localizedDescription)")
+            fatalError("Error initializing audio player: \(error.localizedDescription)")
         }
     }
 
+    public func playAudio() {
+        audioPlayer.play()
+    }
+
+
     public func pauseAudio() {
-        audioPlayer?.pause()
-        isPlaying = false
+        audioPlayer.pause()
     }
 
     public func stopAudio() {
-        audioPlayer?.stop()
-        isPlaying = false 
+        audioPlayer.stop()
+    }
+
+    public func isPlayngAudio() -> Bool {
+        return audioPlayer.isPlaying
     }
 }
 
