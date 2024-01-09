@@ -24,7 +24,7 @@ class AudioPlayerMasterTests: XCTestCase {
     }
 
     func testPauseAudio() {
-        audioPlayer.playAudio()
+        audioPlayer.playAudio(atTime: 0)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.audioPlayer.pauseAudio()
@@ -33,7 +33,7 @@ class AudioPlayerMasterTests: XCTestCase {
     }
 
     func testStopAudio() {
-        audioPlayer.playAudio()
+        audioPlayer.playAudio(atTime: 0)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.audioPlayer.stopAudio()
