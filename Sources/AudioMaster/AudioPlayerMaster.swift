@@ -18,6 +18,14 @@ public class AudioPlayerMaster {
         return audioPlayer.isPlaying
     }
 
+    public var rate: Float  {
+        return audioPlayer.rate
+    }
+
+    public var enableRate: Bool  {
+        return audioPlayer.enableRate
+    }
+
     public init(fileName: String) {
         let audioSession = AVAudioSession.sharedInstance()
 
@@ -33,6 +41,7 @@ public class AudioPlayerMaster {
         } catch {
             fatalError("Error initializing audio player: \(error.localizedDescription)")
         }
+        audioPlayer.enableRate = true
     }
 
     public func playAudio(atTime time: TimeInterval) {
@@ -49,6 +58,10 @@ public class AudioPlayerMaster {
 
     public func setVolume(_ volume: Float, fadeDuration duration: TimeInterval) {
         audioPlayer.setVolume(volume, fadeDuration: duration)
+    }
+
+    public func setRate(_ rate: Float) {
+        audioPlayer.rate = rate
     }
 }
 

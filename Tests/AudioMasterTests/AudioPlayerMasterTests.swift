@@ -57,4 +57,14 @@ class AudioPlayerMasterTests: XCTestCase {
          // 最終的な音量が期待値と一致するか確認
          XCTAssertEqual(audioPlayer.volume, expectedVolume, accuracy: 0.1, "Volume should be set to the expected value")
      }
+
+    func testSetRate() {
+        // Set a test rate value
+        let testRate: Float = 1.5
+        audioPlayer.setRate(testRate)
+
+        // Assert that the rate of the audio player is set correctly
+        XCTAssertTrue(audioPlayer.enableRate, "Audio should be stopped.")
+        XCTAssertEqual(audioPlayer.rate, testRate, "Rate was not set correctly")
+    }
 }
