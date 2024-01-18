@@ -45,7 +45,7 @@ public class AudioPlayerMaster {
     }
 
     public func playAudio(atTime time: TimeInterval) {
-        audioPlayer.play()
+        audioPlayer.play(atTime: time)
     }
 
     public func pauseAudio() {
