@@ -12,6 +12,7 @@ import XCTest
 class AudioPlayerMasterTests: XCTestCase {
     var audioPlayer: AudioPlayerMaster!
 
+
     override func setUp() {
         super.setUp()
         // Assuming "testAudio" is a valid file in your test bundle
@@ -22,6 +23,8 @@ class AudioPlayerMasterTests: XCTestCase {
         audioPlayer = nil
         super.tearDown()
     }
+
+    
 
     func testPauseAudio() {
         audioPlayer.playAudio(atTime: 0)
@@ -66,5 +69,19 @@ class AudioPlayerMasterTests: XCTestCase {
         // Assert that the rate of the audio player is set correctly
         XCTAssertTrue(audioPlayer.enableRate, "Audio should be stopped.")
         XCTAssertEqual(audioPlayer.rate, testRate, "Rate was not set correctly")
+    }
+
+    func testPlayAudioFromURL() {
+
+        let firebaseStorageURL = "https://firebasestorage.googleapis.com/v0/b/voilog.appspot.com/o/maou_game_battle01.mp3?alt=media&token=46686424-e2e2-4230-a65e-93aeb199fd39"
+        audioPlayer.playAudioFromURL(firebaseStorageURL)
+
+        // ダウンロードと再生が完了するのを待つ
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            // ここでaudioPlayerMasterの状態を検証
+            XCTAssertTrue(self.audioPlayer.isPlaying)
+        }
+
     }
 }

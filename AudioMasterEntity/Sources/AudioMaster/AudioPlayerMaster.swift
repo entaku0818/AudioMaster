@@ -44,6 +44,31 @@ public class AudioPlayerMaster {
         audioPlayer.enableRate = true
     }
 
+    public func playAudioFromURL(_ urlString: String) {
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL.")
+            return
+        }
+
+        let downloadTask = URLSession.shared.downloadTask(with: url) { [weak self] location, response, error in
+            guard let self = self, let location = location, error == nil else {
+                print("Error downloading file: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+
+            do {
+                let data = try Data(contentsOf: location)
+                self.audioPlayer = try AVAudioPlayer(data: data)
+                self.audioPlayer.prepareToPlay()
+                self.audioPlayer.play()
+            } catch {
+                print("Error playing audio: \(error.localizedDescription)")
+            }
+        }
+
+        downloadTask.resume()
+    }
+
     public func playAudio(atTime time: TimeInterval) {
         audioPlayer.play(atTime: time)
     }
