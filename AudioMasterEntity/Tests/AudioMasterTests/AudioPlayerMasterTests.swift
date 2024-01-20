@@ -72,13 +72,14 @@ class AudioPlayerMasterTests: XCTestCase {
     }
 
     func testPlayAudioFromURL() {
+        self.audioPlayer.stopAudio()
 
         let firebaseStorageURL = "https://firebasestorage.googleapis.com/v0/b/voilog.appspot.com/o/maou_game_battle01.mp3?alt=media&token=46686424-e2e2-4230-a65e-93aeb199fd39"
         audioPlayer.playAudioFromURL(firebaseStorageURL)
 
         // ダウンロードと再生が完了するのを待つ
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             // ここでaudioPlayerMasterの状態を検証
             XCTAssertTrue(self.audioPlayer.isPlaying)
         }
