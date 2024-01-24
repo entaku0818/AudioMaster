@@ -29,7 +29,7 @@ class AudioPlayerMasterTests: XCTestCase {
     func testPauseAudio() {
         audioPlayer.playAudio(atTime: 0)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.audioPlayer.pauseAudio()
             XCTAssertFalse(self.audioPlayer.isPlaying, "Audio should be paused.")
         }

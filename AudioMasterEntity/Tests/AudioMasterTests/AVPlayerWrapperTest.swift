@@ -57,4 +57,31 @@ class AVPlayerWrapperTests: XCTestCase {
         playerWrapper.seek(to: seekTime)
         XCTAssertEqual(playerWrapper.currentTime, seekTime)
     }
+
+
+    func testRate() {
+        let expectedRate: Float = 1.5
+        playerWrapper.rate = expectedRate
+        XCTAssertEqual(playerWrapper.rate, expectedRate)
+    }
+
+    func testSkipForward() {
+        let skipInterval = 5.0 // 秒
+        let initialTime = playerWrapper.currentTime
+        playerWrapper.skipForward(by: skipInterval)
+        let expectedTime = CMTimeAdd(initialTime, CMTimeMakeWithSeconds(skipInterval, preferredTimescale: initialTime.timescale))
+        XCTAssertEqual(playerWrapper.currentTime, expectedTime)
+    }
+
+    func testSkipBackward() {
+        // 先に進める
+        playerWrapper.skipForward(by: 10.0)
+
+        let skipInterval = 5.0 // 秒
+        let initialTime = playerWrapper.currentTime
+        playerWrapper.skipBackward(by: skipInterval)
+        let expectedTime = CMTimeSubtract(initialTime, CMTimeMakeWithSeconds(skipInterval, preferredTimescale: initialTime.timescale))
+        XCTAssertEqual(playerWrapper.currentTime, expectedTime)
+    }
+
 }
