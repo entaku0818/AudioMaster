@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import AudioMaster
+import AVFAudio
 
 class AudioEngineRecorderTests: XCTestCase {
 
@@ -25,7 +26,7 @@ class AudioEngineRecorderTests: XCTestCase {
     func testRecording() {
         // 録音を開始
         var recordedURL: URL?
-        XCTAssertNoThrow(recordedURL = try recorder.startRecording())
+        XCTAssertNoThrow(recordedURL = try recorder.startRecording(withQuality: .standard))
 
         // 少しの間、録音を続ける
         Thread.sleep(forTimeInterval: 2.0)
@@ -40,6 +41,28 @@ class AudioEngineRecorderTests: XCTestCase {
             XCTAssertFalse(isDirectory.boolValue)
         } else {
             XCTFail("Recording URL should not be nil")
+        }
+    }
+
+    func testHighQualityRecording() {
+        do {
+            // 高品質設定で録音を開始
+            let recordingURL = try recorder.startRecording(withQuality: .high)
+
+            // 期待されるオーディオ設定を確認
+            let audioFile = try AVAudioFile(forReading: recordingURL)
+            let format = audioFile.processingFormat
+            let settings = format.settings
+
+            // サンプルレートの検証
+            XCTAssertEqual(settings[AVSampleRateKey] as? Double, 48000.0)
+
+            // チャネル数の検証
+            XCTAssertEqual(format.channelCount, 2)
+
+
+        } catch {
+            XCTFail("録音の開始に失敗しました: \(error)")
         }
     }
 }
