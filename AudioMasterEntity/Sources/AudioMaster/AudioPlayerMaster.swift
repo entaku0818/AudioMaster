@@ -42,6 +42,7 @@ public class AudioPlayerMaster {
             fatalError("Error initializing audio player: \(error.localizedDescription)")
         }
         audioPlayer.enableRate = true
+        audioPlayer.isMeteringEnabled = true
     }
 
     public func playAudioFromURL(_ urlString: String) {
@@ -87,6 +88,16 @@ public class AudioPlayerMaster {
 
     public func setRate(_ rate: Float) {
         audioPlayer.rate = rate
+    }
+
+    public func peakPower() -> Float {
+        audioPlayer.updateMeters()
+        return audioPlayer.peakPower(forChannel: 0)
+    }
+
+    public func averagePower() -> Float {
+        audioPlayer.updateMeters()
+        return audioPlayer.averagePower(forChannel: 0)
     }
 }
 

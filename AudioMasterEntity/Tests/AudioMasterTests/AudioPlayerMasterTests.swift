@@ -29,11 +29,13 @@ class AudioPlayerMasterTests: XCTestCase {
     func testPauseAudio() {
         audioPlayer.playAudio(atTime: 0)
 
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.audioPlayer.pauseAudio()
             XCTAssertFalse(self.audioPlayer.isPlaying, "Audio should be paused.")
         }
     }
+    
 
     func testStopAudio() {
         audioPlayer.playAudio(atTime: 0)
@@ -60,6 +62,35 @@ class AudioPlayerMasterTests: XCTestCase {
          // 最終的な音量が期待値と一致するか確認
          XCTAssertEqual(audioPlayer.volume, expectedVolume, accuracy: 0.1, "Volume should be set to the expected value")
      }
+
+    func testAveragePowerAudio() {
+        let before = self.audioPlayer.averagePower()
+
+        audioPlayer.playAudio(atTime: 0)
+
+        let after = self.audioPlayer.averagePower()
+        print(before)
+        print(after)
+        XCTAssertNotEqual(before, after)
+    }
+
+    func testMaxPowerAudio() {
+        let before = self.audioPlayer.peakPower()
+
+        audioPlayer.playAudio(atTime: 0)
+
+        let after = self.audioPlayer.peakPower()
+
+
+        print(before)
+        print(after)
+        XCTAssertNotEqual(before, after)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            let after2 = self.audioPlayer.peakPower()
+            XCTAssertEqual(before, after2)
+        }
+
+    }
 
     func testSetRate() {
         // Set a test rate value
