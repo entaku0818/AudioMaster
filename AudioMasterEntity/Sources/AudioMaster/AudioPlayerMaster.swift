@@ -7,7 +7,7 @@
 
 import AVFoundation
 
-public actor AudioPlayerMaster {
+public class AudioPlayerMaster {
 
     private var delegate: Delegate?
 
@@ -77,11 +77,12 @@ public actor AudioPlayerMaster {
         downloadTask.resume()
     }
 
-    public func playAudio(atTime time: TimeInterval){
+    public func playAudio(atTime time: TimeInterval) -> Bool {
         audioPlayer.play(atTime: time)
+        return audioPlayer.isPlaying
     }
 
-    public func playAudio(atTime time: TimeInterval) async throws -> Bool {
+    public func playAudioAsync(atTime time: TimeInterval) async throws -> Bool {
 
         let stream = AsyncThrowingStream<Bool, Error> { continuation in
           do {

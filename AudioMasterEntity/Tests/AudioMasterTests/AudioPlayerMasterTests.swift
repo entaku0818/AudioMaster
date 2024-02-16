@@ -24,7 +24,15 @@ class AudioPlayerMasterTests: XCTestCase {
         super.tearDown()
     }
 
-    
+    func testPlayAudioAtTime() async throws {
+       let result = audioPlayer.playAudio(atTime: 0)
+       XCTAssertTrue(result, "Audio playback should be successful.")
+    }
+
+    func testPlayAudioAtTimeAsync() async throws {
+       let result = try await audioPlayer.playAudioAsync(atTime: 0)
+       XCTAssertTrue(result, "Audio playback should be successful.")
+    }
 
     func testPauseAudio() {
         audioPlayer.playAudio(atTime: 0)
@@ -82,8 +90,6 @@ class AudioPlayerMasterTests: XCTestCase {
         let after = self.audioPlayer.peakPower()
 
 
-        print(before)
-        print(after)
         XCTAssertNotEqual(before, after)
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             let after2 = self.audioPlayer.peakPower()
