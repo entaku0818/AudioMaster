@@ -7,7 +7,11 @@
 
 import AVFoundation
 
-public class AudioPlayerMaster {
+public actor AudioPlayerMaster {
+
+    private var delegate: Delegate?
+
+
     private var audioPlayer: AVAudioPlayer
 
     public var volume: Float  {
@@ -41,6 +45,8 @@ public class AudioPlayerMaster {
         } catch {
             fatalError("Error initializing audio player: \(error.localizedDescription)")
         }
+
+
         audioPlayer.enableRate = true
         audioPlayer.isMeteringEnabled = true
     }
@@ -66,12 +72,43 @@ public class AudioPlayerMaster {
                 print("Error playing audio: \(error.localizedDescription)")
             }
         }
+        
 
         downloadTask.resume()
     }
 
-    public func playAudio(atTime time: TimeInterval) {
+    public func playAudio(atTime time: TimeInterval){
         audioPlayer.play(atTime: time)
+    }
+
+    public func playAudio(atTime time: TimeInterval) async throws -> Bool {
+
+        let stream = AsyncThrowingStream<Bool, Error> { continuation in
+          do {
+              self.delegate = try Delegate(didFinishPlaying: { flag in
+                  continuation.yield(flag)
+                  continuation.finish()
+                  try? AVAudioSession.sharedInstance().setActive(false)
+              }, decodeErrorDidOccur: { error in
+                  continuation.finish(throwing: error)
+                  try? AVAudioSession.sharedInstance().setActive(false)
+              })
+
+
+              try AVAudioSession.sharedInstance().setActive(true)
+              try AVAudioSession.sharedInstance().setCategory(.playback)
+              audioPlayer.delegate = delegate
+
+              audioPlayer.play(atTime: time)
+          } catch {
+            continuation.finish(throwing: error)
+          }
+        }
+
+        for try await didFinish in stream {
+          return didFinish
+        }
+        throw CancellationError()
     }
 
     public func pauseAudio() {
@@ -102,3 +139,24 @@ public class AudioPlayerMaster {
 }
 
 
+private final class Delegate: NSObject, AVAudioPlayerDelegate, Sendable {
+  let didFinishPlaying: @Sendable (Bool) -> Void
+  let decodeErrorDidOccur: @Sendable (Error?) -> Void
+
+  init(
+    didFinishPlaying: @escaping @Sendable (Bool) -> Void,
+    decodeErrorDidOccur: @escaping @Sendable (Error?) -> Void
+  ) throws {
+    self.didFinishPlaying = didFinishPlaying
+    self.decodeErrorDidOccur = decodeErrorDidOccur
+    super.init()
+  }
+
+  func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    self.didFinishPlaying(flag)
+  }
+
+  func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+    self.decodeErrorDidOccur(error)
+  }
+}
