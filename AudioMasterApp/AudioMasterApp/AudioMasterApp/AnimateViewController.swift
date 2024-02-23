@@ -20,8 +20,7 @@ struct AnimateViewControllerWrapper: UIViewControllerRepresentable {
 
 class AnimateViewController: UIViewController {
 
-
-
+    private var volumeVisualizerView: VolumeVisualizerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +28,7 @@ class AnimateViewController: UIViewController {
         let viewsCount = 4
         let viewHeight: CGFloat = 80
         let viewWidth: CGFloat = self.view.bounds.width - 40 // 画面幅からマージンを引いた値
-        let startY: CGFloat = 100
+        let startY: CGFloat = 50
         let spacing: CGFloat = 10
 
         for i in 0..<viewsCount {
@@ -40,6 +39,12 @@ class AnimateViewController: UIViewController {
         }
 
 
+        let visualizerWidth: CGFloat = 50
+        volumeVisualizerView = VolumeVisualizerView(frame: CGRect(x: 20, y: 500, width: visualizerWidth, height: 50))
+        volumeVisualizerView.backgroundColor = .black
+        self.view.addSubview(volumeVisualizerView)
+
+        simulateVolumeChanges()
 
     }
 
@@ -50,17 +55,17 @@ class AnimateViewController: UIViewController {
         var delay = 0.0
 
         for i in 0..<self.view.subviews.count {
-            if let animatedView = self.view.subviews[i] as? UIView, animatedView.tag < 4 {
+            if let animatedView = self.view.subviews[i] as? UIView {
                 // 各アニメーション開始前に遅延を設定
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                     switch animatedView.tag {
-                    case 0:
-                        self.scaleAnimation(animatedView)
                     case 1:
-                        self.colorChangeAnimation(animatedView)
+                        self.scaleAnimation(animatedView)
                     case 2:
-                        self.alphaAnimation(animatedView)
+                        self.colorChangeAnimation(animatedView)
                     case 3:
+                        self.alphaAnimation(animatedView)
+                    case 4:
                         self.rotationAnimation(animatedView)
                     default:
                         break
@@ -104,6 +109,14 @@ class AnimateViewController: UIViewController {
             view.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         } completion: { _ in
             view.transform = .identity 
+        }
+    }
+
+    func simulateVolumeChanges() {
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            // 音の大きさをシミュレートするためにランダムな値を生成
+            let randomVolumes = [CGFloat.random(in: 0.1...1.0), CGFloat.random(in: 0.1...1.0), CGFloat.random(in: 0.1...1.0)]
+            self?.volumeVisualizerView.updateVolume(randomVolumes)
         }
     }
 
