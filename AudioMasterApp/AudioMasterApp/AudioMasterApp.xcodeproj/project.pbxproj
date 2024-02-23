@@ -16,6 +16,7 @@
 		61193CDF2B58B9F400DD324C /* AudioMasterAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61193CDE2B58B9F400DD324C /* AudioMasterAppUITestsLaunchTests.swift */; };
 		61193CED2B58BA9A00DD324C /* AudioMaster in Frameworks */ = {isa = PBXBuildFile; productRef = 61193CEC2B58BA9A00DD324C /* AudioMaster */; };
 		613D9FD92B7C442200D17DDC /* SoundAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613D9FD82B7C442200D17DDC /* SoundAnimationView.swift */; };
+		615702652B8873C700096E5F /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615702642B8873C700096E5F /* Sound.swift */; };
 		6167018E2B82E06A004D8C59 /* AnimateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6167018D2B82E06A004D8C59 /* AnimateViewController.swift */; };
 		617999A52B85859000A72630 /* AgoraVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617999A42B85859000A72630 /* AgoraVideoViewController.swift */; };
 		617999A82B85869C00A72630 /* RtcBasic in Frameworks */ = {isa = PBXBuildFile; productRef = 617999A72B85869C00A72630 /* RtcBasic */; };
@@ -50,6 +51,7 @@
 		61193CDC2B58B9F400DD324C /* AudioMasterAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMasterAppUITests.swift; sourceTree = "<group>"; };
 		61193CDE2B58B9F400DD324C /* AudioMasterAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMasterAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		613D9FD82B7C442200D17DDC /* SoundAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnimationView.swift; sourceTree = "<group>"; };
+		615702642B8873C700096E5F /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		6167018D2B82E06A004D8C59 /* AnimateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateViewController.swift; sourceTree = "<group>"; };
 		617999A42B85859000A72630 /* AgoraVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraVideoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +110,7 @@
 				61193CC32B58B9F200DD324C /* ContentView.swift */,
 				613D9FD82B7C442200D17DDC /* SoundAnimationView.swift */,
 				6167018D2B82E06A004D8C59 /* AnimateViewController.swift */,
+				615702642B8873C700096E5F /* Sound.swift */,
 				61193CC52B58B9F400DD324C /* Assets.xcassets */,
 				61193CC72B58B9F400DD324C /* Preview Content */,
 				617999A42B85859000A72630 /* AgoraVideoViewController.swift */,
@@ -279,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6167018E2B82E06A004D8C59 /* AnimateViewController.swift in Sources */,
+				615702652B8873C700096E5F /* Sound.swift in Sources */,
 				617999A52B85859000A72630 /* AgoraVideoViewController.swift in Sources */,
 				61193CC42B58B9F200DD324C /* ContentView.swift in Sources */,
 				613D9FD92B7C442200D17DDC /* SoundAnimationView.swift in Sources */,

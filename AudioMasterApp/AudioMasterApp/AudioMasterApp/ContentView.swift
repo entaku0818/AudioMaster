@@ -14,6 +14,9 @@ struct ContentView: View {
                 NavigationLink(destination: AgoraVideoView()) {
                     Text("Show Video Call")
                 }
+                NavigationLink(destination: AnimateViewControllerWrapper()) {
+                    Text("Show Animation")
+                }
             }
             .navigationBarTitle("Main View", displayMode: .inline)
         }
