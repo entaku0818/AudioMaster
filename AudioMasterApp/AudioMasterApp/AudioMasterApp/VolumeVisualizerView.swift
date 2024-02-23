@@ -28,7 +28,7 @@ class VolumeVisualizerView: UIView {
 
         for i in 0..<barCount {
             let barView = UIView(frame: CGRect(x: (barWidth + spacing) * CGFloat(i), y: 0, width: barWidth, height: self.bounds.height))
-            barView.backgroundColor = .white
+            barView.backgroundColor = .gray
             self.addSubview(barView)
             barViews.append(barView)
         }

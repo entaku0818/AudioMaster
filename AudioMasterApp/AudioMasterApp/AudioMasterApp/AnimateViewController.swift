@@ -27,7 +27,7 @@ class AnimateViewController: UIViewController {
 
         let viewsCount = 4
         let viewHeight: CGFloat = 80
-        let viewWidth: CGFloat = self.view.bounds.width - 40 // 画面幅からマージンを引いた値
+        let viewWidth: CGFloat = self.view.bounds.width - 40 
         let startY: CGFloat = 50
         let spacing: CGFloat = 10
 
@@ -35,7 +35,7 @@ class AnimateViewController: UIViewController {
             let animatedView = UIView(frame: CGRect(x: 20, y: startY + CGFloat(i) * (viewHeight + spacing), width: viewWidth, height: viewHeight))
             animatedView.backgroundColor = [.red, .blue, .green, .yellow][i]
             self.view.addSubview(animatedView)
-            animatedView.tag = i
+            animatedView.tag = i + 1
         }
 
 
