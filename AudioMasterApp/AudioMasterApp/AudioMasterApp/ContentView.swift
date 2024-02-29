@@ -17,6 +17,12 @@ struct ContentView: View {
                 NavigationLink(destination: AnimateViewControllerWrapper()) {
                     Text("Show Animation")
                 }
+
+
+                NavigationLink(destination:  PlayerView()) {
+                    Text("Show Move")
+                }
+                
             }
             .navigationBarTitle("Main View", displayMode: .inline)
         }

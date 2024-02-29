@@ -8,14 +8,17 @@
 import Foundation
 import AVFoundation
 
-import Foundation
-import AVFoundation
 
 public class AVPlayerWrapper {
     private var player: AVPlayer
     private var playerItem: AVPlayerItem?
     private var timeObserverToken: Any?
     private var itemDidPlayToEndObserver: NSObjectProtocol?
+
+
+    public var avPlayer: AVPlayer {
+        get { player }
+    }
 
     public var volume: Float {
         get { player.volume }

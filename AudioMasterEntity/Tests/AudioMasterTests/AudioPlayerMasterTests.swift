@@ -26,7 +26,7 @@ class AudioPlayerMasterTests: XCTestCase {
 
     func testPlayAudioAtTime() async throws {
        let result = audioPlayer.playAudio(atTime: 0)
-       XCTAssertTrue(result, "Audio playback should be successful.")
+       XCTAssertTrue(result, "Audio play should be successful.")
     }
 
     func testPlayAudioAtTimeAsync() async throws {
