@@ -66,25 +66,3 @@ public class TextToSpeechConverter {
     }
 }
 
-
-private final class Delegate: NSObject, AVAudioPlayerDelegate, Sendable {
-  let didFinishPlaying: @Sendable (Bool) -> Void
-  let decodeErrorDidOccur: @Sendable (Error?) -> Void
-
-  init(
-    didFinishPlaying: @escaping @Sendable (Bool) -> Void,
-    decodeErrorDidOccur: @escaping @Sendable (Error?) -> Void
-  ) throws {
-    self.didFinishPlaying = didFinishPlaying
-    self.decodeErrorDidOccur = decodeErrorDidOccur
-    super.init()
-  }
-
-  func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-    self.didFinishPlaying(flag)
-  }
-
-  func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
-    self.decodeErrorDidOccur(error)
-  }
-}
