@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "agorartcengine_ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AgoraIO/AgoraRtcEngine_iOS.git",
+      "state" : {
+        "revision" : "4b6ec9d55d174da681cf024beba555bebadef705",
+        "version" : "4.3.0"
+      }
+    }
+  ],
+  "version" : 2
+}

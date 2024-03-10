@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		610329F92B9D379D00EBB3AC /* AVSpeechSynthesizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610329F82B9D379D00EBB3AC /* AVSpeechSynthesizerView.swift */; };
 		61193CC22B58B9F200DD324C /* AudioMasterAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61193CC12B58B9F200DD324C /* AudioMasterAppApp.swift */; };
 		61193CC42B58B9F200DD324C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61193CC32B58B9F200DD324C /* ContentView.swift */; };
 		61193CC62B58B9F400DD324C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61193CC52B58B9F400DD324C /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		610329F82B9D379D00EBB3AC /* AVSpeechSynthesizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVSpeechSynthesizerView.swift; sourceTree = "<group>"; };
 		61193CBE2B58B9F200DD324C /* AudioMasterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioMasterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61193CC12B58B9F200DD324C /* AudioMasterAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMasterAppApp.swift; sourceTree = "<group>"; };
 		61193CC32B58B9F200DD324C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		610329F72B9D371C00EBB3AC /* AVF */ = {
+			isa = PBXGroup;
+			children = (
+				613D9FD82B7C442200D17DDC /* SoundAnimationView.swift */,
+				6167018D2B82E06A004D8C59 /* AnimateViewController.swift */,
+				615702642B8873C700096E5F /* VolumeVisualizerView.swift */,
+				61B255242B90102400796515 /* PlayerView.swift */,
+				610329F82B9D379D00EBB3AC /* AVSpeechSynthesizerView.swift */,
+			);
+			path = AVF;
+			sourceTree = "<group>";
+		};
 		61193CB52B58B9F200DD324C = {
 			isa = PBXGroup;
 			children = (
@@ -110,12 +124,9 @@
 		61193CC02B58B9F200DD324C /* AudioMasterApp */ = {
 			isa = PBXGroup;
 			children = (
+				610329F72B9D371C00EBB3AC /* AVF */,
 				61193CC12B58B9F200DD324C /* AudioMasterAppApp.swift */,
 				61193CC32B58B9F200DD324C /* ContentView.swift */,
-				613D9FD82B7C442200D17DDC /* SoundAnimationView.swift */,
-				6167018D2B82E06A004D8C59 /* AnimateViewController.swift */,
-				615702642B8873C700096E5F /* VolumeVisualizerView.swift */,
-				61B255242B90102400796515 /* PlayerView.swift */,
 				61193CC52B58B9F400DD324C /* Assets.xcassets */,
 				61B255282B90117600796515 /* sample.mp4 */,
 				61193CC72B58B9F400DD324C /* Preview Content */,
@@ -291,6 +302,7 @@
 				6167018E2B82E06A004D8C59 /* AnimateViewController.swift in Sources */,
 				615702652B8873C700096E5F /* VolumeVisualizerView.swift in Sources */,
 				61B255252B90102400796515 /* PlayerView.swift in Sources */,
+				610329F92B9D379D00EBB3AC /* AVSpeechSynthesizerView.swift in Sources */,
 				617999A52B85859000A72630 /* AgoraVideoViewController.swift in Sources */,
 				61193CC42B58B9F200DD324C /* ContentView.swift in Sources */,
 				613D9FD92B7C442200D17DDC /* SoundAnimationView.swift in Sources */,

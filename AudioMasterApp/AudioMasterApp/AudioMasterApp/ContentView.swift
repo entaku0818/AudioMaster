@@ -22,7 +22,10 @@ struct ContentView: View {
                 NavigationLink(destination:  PlayerView()) {
                     Text("Show Move")
                 }
-                
+                NavigationLink(destination:  AVSpeechSynthesizerView()) {
+                    Text("Show AVSpeechSynthesizer")
+                }
+
             }
             .navigationBarTitle("Main View", displayMode: .inline)
         }
