@@ -28,6 +28,9 @@ struct ContentView: View {
                 NavigationLink(destination:  VideoView()) {
                     Text("Show VideoView")
                 }
+                NavigationLink(destination:  AudioProcessorView()) {
+                    Text("Show AudioProcessorView")
+                }
             }
             .navigationBarTitle("Main View", displayMode: .inline)
         }
