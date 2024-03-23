@@ -25,7 +25,9 @@ struct ContentView: View {
                 NavigationLink(destination:  AVSpeechSynthesizerView()) {
                     Text("Show AVSpeechSynthesizer")
                 }
-
+                NavigationLink(destination:  VideoView()) {
+                    Text("Show VideoView")
+                }
             }
             .navigationBarTitle("Main View", displayMode: .inline)
         }
