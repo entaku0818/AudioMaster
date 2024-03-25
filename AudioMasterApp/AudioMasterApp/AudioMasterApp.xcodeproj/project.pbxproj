@@ -101,13 +101,12 @@
 		610329F72B9D371C00EBB3AC /* AVF */ = {
 			isa = PBXGroup;
 			children = (
+				6138E0752BB1C39600DA0398 /* VideoView */,
 				613D9FD82B7C442200D17DDC /* SoundAnimationView.swift */,
 				6167018D2B82E06A004D8C59 /* AnimateViewController.swift */,
 				615702642B8873C700096E5F /* VolumeVisualizerView.swift */,
 				61B255242B90102400796515 /* PlayerView.swift */,
 				610329F82B9D379D00EBB3AC /* AVSpeechSynthesizerView.swift */,
-				619AE5FA2BAD697A00CE4C4C /* VideoCaptureView.swift */,
-				619AE5FD2BAD6B8D00CE4C4C /* VideoView.swift */,
 				61DFB7932BAEBC8D00A4868F /* AudioProcessorViewModel.swift */,
 				61DFB7952BAEBCA800A4868F /* AudioProcessorView.swift */,
 			);
@@ -172,6 +171,15 @@
 				61193CDE2B58B9F400DD324C /* AudioMasterAppUITestsLaunchTests.swift */,
 			);
 			path = AudioMasterAppUITests;
+			sourceTree = "<group>";
+		};
+		6138E0752BB1C39600DA0398 /* VideoView */ = {
+			isa = PBXGroup;
+			children = (
+				619AE5FA2BAD697A00CE4C4C /* VideoCaptureView.swift */,
+				619AE5FD2BAD6B8D00CE4C4C /* VideoView.swift */,
+			);
+			path = VideoView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
