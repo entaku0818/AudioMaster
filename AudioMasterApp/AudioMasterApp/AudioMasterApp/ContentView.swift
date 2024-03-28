@@ -31,6 +31,9 @@ struct ContentView: View {
                 NavigationLink(destination:  AudioProcessorView()) {
                     Text("Show AudioProcessorView")
                 }
+                NavigationLink(destination:  CameraPreviewContentView()) {
+                    Text("Show CameraPreviewContentView")
+                }
             }
             .navigationBarTitle("Main View", displayMode: .inline)
         }
