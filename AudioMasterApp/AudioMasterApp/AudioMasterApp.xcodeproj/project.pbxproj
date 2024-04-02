@@ -18,6 +18,9 @@
 		61193CDF2B58B9F400DD324C /* AudioMasterAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61193CDE2B58B9F400DD324C /* AudioMasterAppUITestsLaunchTests.swift */; };
 		61193CED2B58BA9A00DD324C /* AudioMaster in Frameworks */ = {isa = PBXBuildFile; productRef = 61193CEC2B58BA9A00DD324C /* AudioMaster */; };
 		613D9FD92B7C442200D17DDC /* SoundAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613D9FD82B7C442200D17DDC /* SoundAnimationView.swift */; };
+		61523A7E2BBB821C0083B486 /* CameraPreviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61523A7D2BBB821C0083B486 /* CameraPreviewContentView.swift */; };
+		61523A802BBB82410083B486 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61523A7F2BBB82410083B486 /* ImageView.swift */; };
+		61523A822BBB829B0083B486 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61523A812BBB829B0083B486 /* CameraViewModel.swift */; };
 		615702652B8873C700096E5F /* VolumeVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615702642B8873C700096E5F /* VolumeVisualizerView.swift */; };
 		6167018E2B82E06A004D8C59 /* AnimateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6167018D2B82E06A004D8C59 /* AnimateViewController.swift */; };
 		617999A52B85859000A72630 /* AgoraVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617999A42B85859000A72630 /* AgoraVideoViewController.swift */; };
@@ -61,6 +64,9 @@
 		61193CDC2B58B9F400DD324C /* AudioMasterAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMasterAppUITests.swift; sourceTree = "<group>"; };
 		61193CDE2B58B9F400DD324C /* AudioMasterAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMasterAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		613D9FD82B7C442200D17DDC /* SoundAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnimationView.swift; sourceTree = "<group>"; };
+		61523A7D2BBB821C0083B486 /* CameraPreviewContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewContentView.swift; sourceTree = "<group>"; };
+		61523A7F2BBB82410083B486 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		61523A812BBB829B0083B486 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		615702642B8873C700096E5F /* VolumeVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeVisualizerView.swift; sourceTree = "<group>"; };
 		6167018D2B82E06A004D8C59 /* AnimateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateViewController.swift; sourceTree = "<group>"; };
 		617999A42B85859000A72630 /* AgoraVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraVideoViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +109,7 @@
 		610329F72B9D371C00EBB3AC /* AVF */ = {
 			isa = PBXGroup;
 			children = (
+				61523A7C2BBB820A0083B486 /* CameraPreview */,
 				6138E0752BB1C39600DA0398 /* VideoView */,
 				613D9FD82B7C442200D17DDC /* SoundAnimationView.swift */,
 				6167018D2B82E06A004D8C59 /* AnimateViewController.swift */,
@@ -111,7 +118,6 @@
 				610329F82B9D379D00EBB3AC /* AVSpeechSynthesizerView.swift */,
 				61DFB7932BAEBC8D00A4868F /* AudioProcessorViewModel.swift */,
 				61DFB7952BAEBCA800A4868F /* AudioProcessorView.swift */,
-				6100F2122BB4F437005AA35D /* CameraPreview.swift */,
 			);
 			path = AVF;
 			sourceTree = "<group>";
@@ -183,6 +189,17 @@
 				619AE5FD2BAD6B8D00CE4C4C /* VideoView.swift */,
 			);
 			path = VideoView;
+			sourceTree = "<group>";
+		};
+		61523A7C2BBB820A0083B486 /* CameraPreview */ = {
+			isa = PBXGroup;
+			children = (
+				6100F2122BB4F437005AA35D /* CameraPreview.swift */,
+				61523A7D2BBB821C0083B486 /* CameraPreviewContentView.swift */,
+				61523A7F2BBB82410083B486 /* ImageView.swift */,
+				61523A812BBB829B0083B486 /* CameraViewModel.swift */,
+			);
+			path = CameraPreview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,15 +341,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61523A802BBB82410083B486 /* ImageView.swift in Sources */,
 				6167018E2B82E06A004D8C59 /* AnimateViewController.swift in Sources */,
 				6100F2132BB4F437005AA35D /* CameraPreview.swift in Sources */,
 				615702652B8873C700096E5F /* VolumeVisualizerView.swift in Sources */,
 				61B255252B90102400796515 /* PlayerView.swift in Sources */,
+				61523A822BBB829B0083B486 /* CameraViewModel.swift in Sources */,
 				619AE5FB2BAD697A00CE4C4C /* VideoCaptureView.swift in Sources */,
 				61DFB7962BAEBCA800A4868F /* AudioProcessorView.swift in Sources */,
 				610329F92B9D379D00EBB3AC /* AVSpeechSynthesizerView.swift in Sources */,
 				619AE5FE2BAD6B8D00CE4C4C /* VideoView.swift in Sources */,
 				617999A52B85859000A72630 /* AgoraVideoViewController.swift in Sources */,
+				61523A7E2BBB821C0083B486 /* CameraPreviewContentView.swift in Sources */,
 				61193CC42B58B9F200DD324C /* ContentView.swift in Sources */,
 				61DFB7942BAEBC8D00A4868F /* AudioProcessorViewModel.swift in Sources */,
 				613D9FD92B7C442200D17DDC /* SoundAnimationView.swift in Sources */,
