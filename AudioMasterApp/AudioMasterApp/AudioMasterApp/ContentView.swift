@@ -28,8 +28,8 @@ struct ContentView: View {
                 NavigationLink(destination:  VideoView()) {
                     Text("Show VideoView")
                 }
-                NavigationLink(destination:  AudioProcessorView()) {
-                    Text("Show AudioProcessorView")
+                NavigationLink(destination:  WhisperKitView()) {
+                    Text("Show WhisperKitView")
                 }
                 NavigationLink(destination:  CameraPreviewContentView()) {
                     Text("Show CameraPreviewContentView")
