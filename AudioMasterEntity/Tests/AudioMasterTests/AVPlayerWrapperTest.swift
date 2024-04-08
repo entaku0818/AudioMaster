@@ -19,7 +19,7 @@ class AVPlayerWrapperTests: XCTestCase {
         super.setUp()
         // テスト用のURLを作成（実際のオーディオファイルは不要）
         mockURL = URL(string: "https://example.com/audio.mp3")!
-        playerWrapper = AVPlayerWrapper(url: mockURL)
+        playerWrapper = AVPlayerWrapper(urls: [mockURL])
     }
 
     override func tearDown() {

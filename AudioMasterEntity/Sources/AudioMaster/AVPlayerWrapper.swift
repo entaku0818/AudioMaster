@@ -10,79 +10,103 @@ import AVFoundation
 
 
 public class AVPlayerWrapper {
-    private var player: AVPlayer
-    private var playerItem: AVPlayerItem?
-    private var timeObserverToken: Any?
-    private var itemDidPlayToEndObserver: NSObjectProtocol?
+    private var player: AVPlayer = AVPlayer()
+      private var playerItems: [AVPlayerItem] = []
+      private var timeObserverToken: Any?
+      private var itemDidPlayToEndObserver: NSObjectProtocol?
 
+      public var avPlayer: AVPlayer {
+          return player
+      }
 
-    public var avPlayer: AVPlayer {
-        get { player }
-    }
+      public var volume: Float {
+          get { player.volume }
+          set { player.volume = newValue }
+      }
 
-    public var volume: Float {
-        get { player.volume }
-        set { player.volume = newValue }
-    }
+      public var isPlaying: Bool {
+          return player.rate != 0
+      }
 
-    public var isPlaying: Bool {
-        player.rate != 0
-    }
+      public var isPaused: Bool {
+          return player.rate == 0 && player.currentTime() != CMTime.zero
+      }
 
-    public var isPaused: Bool {
-        player.rate == 0 && player.currentTime() != CMTime.zero
-    }
+      public var currentTime: CMTime {
+          return player.currentTime()
+      }
 
-    public var currentTime: CMTime {
-        player.currentTime()
-    }
+      public var rate: Float {
+          get { player.rate }
+          set { player.rate = newValue }
+      }
 
-    public var rate: Float {
-        get { player.rate }
-        set { player.rate = newValue }
-    }
+      public init(urls: [URL]) {
+          self.playerItems = urls.map { AVPlayerItem(url: $0) }
+          setupEndPlaybackObserver()
+          loadNextItem()
+      }
 
-    public init(url: URL) {
-        self.playerItem = AVPlayerItem(url: url)
-        self.player = AVPlayer(playerItem: playerItem)
-        setupEndPlaybackObserver()
-    }
+      deinit {
+          cleanUp()
+      }
 
-    deinit {
-        if let observer = timeObserverToken {
-            player.removeTimeObserver(observer)
-        }
-        if let observer = itemDidPlayToEndObserver {
-            NotificationCenter.default.removeObserver(observer)
-        }
-    }
+      private func setupEndPlaybackObserver() {
+          itemDidPlayToEndObserver = NotificationCenter.default.addObserver(
+              forName: .AVPlayerItemDidPlayToEndTime,
+              object: nil, // Listen to any item finishing
+              queue: .main) { [weak self] _ in
+                  self?.loadNextItem()
+              }
+      }
 
-    private func setupEndPlaybackObserver() {
-        itemDidPlayToEndObserver = NotificationCenter.default.addObserver(
-            forName: .AVPlayerItemDidPlayToEndTime,
-            object: player.currentItem,
-            queue: .main) { [weak self] _ in
-                self?.player.seek(to: CMTime.zero)
-                self?.player.pause()
-            }
-    }
+      private func cleanUp() {
+          if let observer = timeObserverToken {
+              player.removeTimeObserver(observer)
+              timeObserverToken = nil
+          }
+          if let observer = itemDidPlayToEndObserver {
+              NotificationCenter.default.removeObserver(observer)
+              itemDidPlayToEndObserver = nil
+          }
+      }
 
-    public func play() {
-        player.play()
-    }
+      private func loadNextItem() {
+          if !playerItems.isEmpty {
+              let nextItem = playerItems.removeFirst()
+              player.replaceCurrentItem(with: nextItem)
+              player.play()
+          } else {
+              stop()
+          }
+      }
 
-    public func pause() {
-        player.pause()
-    }
+      public func play() {
+          if player.currentItem == nil && !playerItems.isEmpty {
+              loadNextItem()
+          } else {
+              player.play()
+          }
+      }
 
-    public func stop() {
-        player.pause()
-        player.seek(to: CMTime.zero)
-    }
+      public func pause() {
+          player.pause()
+      }
 
-    public func seek(to time: CMTime) {
-        player.seek(to: time)
-    }
+      public func stop() {
+          player.pause()
+          player.seek(to: CMTime.zero)
+          player.replaceCurrentItem(with: nil)
+          playerItems.removeAll()
+      }
+
+      public func seek(to time: CMTime) {
+          player.seek(to: time)
+      }
+
+      public func addPeriodicTimeObserver(interval: CMTime, queue: DispatchQueue?, using block: @escaping (CMTime) -> Void) {
+          timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: queue, using: block)
+      }
 
     public func skipForward(by seconds: Double) {
         let currentTime = player.currentTime()
@@ -96,7 +120,4 @@ public class AVPlayerWrapper {
         player.seek(to: newTime)
     }
 
-    public func addPeriodicTimeObserver(interval: CMTime, queue: DispatchQueue?, using block: @escaping (CMTime) -> Void) {
-        timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: queue, using: block)
-    }
 }
