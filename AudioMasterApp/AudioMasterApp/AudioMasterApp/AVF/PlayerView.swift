@@ -11,7 +11,16 @@ import AudioMaster
 
 
 struct PlayerView: View {
-    private let player = AVPlayerWrapper(url: Bundle.main.url(forResource: "sample", withExtension: "mp4")!)
+    private let player:AVPlayerWrapper
+
+    init() {
+        player = AVPlayerWrapper(urls:
+                [
+                    Bundle.main.url(forResource: "sample", withExtension: "mp4")!,
+                    Bundle.main.url(forResource: "sample2", withExtension: "mp4")!
+                ]
+        )
+    }
 
     var body: some View {
         HStack{

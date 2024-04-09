@@ -32,6 +32,7 @@
 		61B15DBE2BC14C2F0009EB6A /* whisper_sample.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 61B15DBD2BC14C2F0009EB6A /* whisper_sample.mp3 */; };
 		61B255252B90102400796515 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B255242B90102400796515 /* PlayerView.swift */; };
 		61B255292B90136800796515 /* sample.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 61B255282B90117600796515 /* sample.mp4 */; };
+		61CFB6E12BC4C74900849C47 /* sample2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 61CFB6E02BC4C5A400849C47 /* sample2.mp4 */; };
 		61DFB7942BAEBC8D00A4868F /* AudioProcessorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DFB7932BAEBC8D00A4868F /* AudioProcessorViewModel.swift */; };
 		61DFB7962BAEBCA800A4868F /* AudioProcessorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DFB7952BAEBCA800A4868F /* AudioProcessorView.swift */; };
 /* End PBXBuildFile section */
@@ -80,6 +81,7 @@
 		61B15DBD2BC14C2F0009EB6A /* whisper_sample.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = whisper_sample.mp3; sourceTree = "<group>"; };
 		61B255242B90102400796515 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		61B255282B90117600796515 /* sample.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.mp4; sourceTree = "<group>"; };
+		61CFB6E02BC4C5A400849C47 /* sample2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample2.mp4; sourceTree = "<group>"; };
 		61DFB7932BAEBC8D00A4868F /* AudioProcessorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioProcessorViewModel.swift; sourceTree = "<group>"; };
 		61DFB7952BAEBCA800A4868F /* AudioProcessorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioProcessorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,6 +161,7 @@
 				61193CC52B58B9F400DD324C /* Assets.xcassets */,
 				61B15DBD2BC14C2F0009EB6A /* whisper_sample.mp3 */,
 				61B255282B90117600796515 /* sample.mp4 */,
+				61CFB6E02BC4C5A400849C47 /* sample2.mp4 */,
 				61193CC72B58B9F400DD324C /* Preview Content */,
 				617999A42B85859000A72630 /* AgoraVideoViewController.swift */,
 			);
@@ -324,6 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61CFB6E12BC4C74900849C47 /* sample2.mp4 in Resources */,
 				61193CC92B58B9F400DD324C /* Preview Assets.xcassets in Resources */,
 				61B255292B90136800796515 /* sample.mp4 in Resources */,
 				61193CC62B58B9F400DD324C /* Assets.xcassets in Resources */,
