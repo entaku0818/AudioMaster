@@ -54,7 +54,7 @@ public class AVPlayerWrapper {
       private func setupEndPlaybackObserver() {
           itemDidPlayToEndObserver = NotificationCenter.default.addObserver(
               forName: .AVPlayerItemDidPlayToEndTime,
-              object: nil, // Listen to any item finishing
+              object: nil, 
               queue: .main) { [weak self] _ in
                   self?.loadNextItem()
               }
