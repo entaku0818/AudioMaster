@@ -28,6 +28,10 @@ struct ContentView: View {
                 NavigationLink(destination:  VideoView()) {
                     Text("Show VideoView")
                 }
+
+                NavigationLink(destination:  PiPVideoPlayerView()) {
+                    Text("Show PiPVideoPlayerView")
+                }
                 NavigationLink(destination:  WhisperKitView()) {
                     Text("Show WhisperKitView")
                 }

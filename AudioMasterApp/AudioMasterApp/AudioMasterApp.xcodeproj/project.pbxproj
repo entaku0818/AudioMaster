@@ -33,6 +33,7 @@
 		61B255252B90102400796515 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B255242B90102400796515 /* PlayerView.swift */; };
 		61B255292B90136800796515 /* sample.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 61B255282B90117600796515 /* sample.mp4 */; };
 		61CFB6E12BC4C74900849C47 /* sample2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 61CFB6E02BC4C5A400849C47 /* sample2.mp4 */; };
+		61CFB6E32BC587C100849C47 /* PiPVideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CFB6E22BC587C100849C47 /* PiPVideoPlayerView.swift */; };
 		61DFB7942BAEBC8D00A4868F /* AudioProcessorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DFB7932BAEBC8D00A4868F /* AudioProcessorViewModel.swift */; };
 		61DFB7962BAEBCA800A4868F /* AudioProcessorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DFB7952BAEBCA800A4868F /* AudioProcessorView.swift */; };
 /* End PBXBuildFile section */
@@ -82,6 +83,7 @@
 		61B255242B90102400796515 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		61B255282B90117600796515 /* sample.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.mp4; sourceTree = "<group>"; };
 		61CFB6E02BC4C5A400849C47 /* sample2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample2.mp4; sourceTree = "<group>"; };
+		61CFB6E22BC587C100849C47 /* PiPVideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiPVideoPlayerView.swift; sourceTree = "<group>"; };
 		61DFB7932BAEBC8D00A4868F /* AudioProcessorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioProcessorViewModel.swift; sourceTree = "<group>"; };
 		61DFB7952BAEBCA800A4868F /* AudioProcessorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioProcessorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +129,7 @@
 				61DFB7932BAEBC8D00A4868F /* AudioProcessorViewModel.swift */,
 				61DFB7952BAEBCA800A4868F /* AudioProcessorView.swift */,
 				61B15DB72BC1472B0009EB6A /* WhisperKitView.swift */,
+				61CFB6E22BC587C100849C47 /* PiPVideoPlayerView.swift */,
 			);
 			path = AVF;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				61523A802BBB82410083B486 /* ImageView.swift in Sources */,
 				6167018E2B82E06A004D8C59 /* AnimateViewController.swift in Sources */,
 				6100F2132BB4F437005AA35D /* CameraPreview.swift in Sources */,
+				61CFB6E32BC587C100849C47 /* PiPVideoPlayerView.swift in Sources */,
 				61B15DB82BC1472B0009EB6A /* WhisperKitView.swift in Sources */,
 				615702652B8873C700096E5F /* VolumeVisualizerView.swift in Sources */,
 				61B255252B90102400796515 /* PlayerView.swift in Sources */,
