@@ -40,32 +40,42 @@ class CoreAnimationViewController: UIViewController {
     }
 
     func animateDance() {
-        // キーフレームアニメーションオブジェクトを作成
-        let danceAnimation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+        // 回転アニメーションオブジェクトを作成
+        let rotationAnimation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+        rotationAnimation.values = [0, 0.05, 0, -0.05, 0] // 左右に振る
+        rotationAnimation.duration = 0.15
+        rotationAnimation.repeatCount = Float.infinity
 
-        // アニメーションのキーフレームを定義
-        danceAnimation.values = [0, 0.1, 0, -0.1, 0] // 左右に振る
-        danceAnimation.duration = 0.1 // 0.6秒間
-        danceAnimation.repeatCount = Float.infinity // 無限に繰り返す
+        // 上下移動のアニメーションオブジェクトを作成
+        let verticalAnimation = CAKeyframeAnimation(keyPath: "transform.translation.y")
+        verticalAnimation.values = [0, -1, 0, 1, 0] // 上下に振る
+        verticalAnimation.duration = 0.2
+        verticalAnimation.repeatCount = Float.infinity
 
-        // アニメーションをUIImageViewのレイヤーに追加
-        dancingImageView.layer.add(danceAnimation, forKey: "dancing")
+        // アニメーショングループを作成し、UIImageViewのレイヤーに追加
+        let group = CAAnimationGroup()
+        group.animations = [rotationAnimation, verticalAnimation]
+        group.duration = 0.6
+        group.repeatCount = Float.infinity
+        dancingImageView.layer.add(group, forKey: "dancing")
     }
 
+
     func animateCircularMotion() {
-        // 円運動のパスを作成
-        let circularPath = UIBezierPath(arcCenter: CGPoint(x: 200, y: 250), radius: 5, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+        // 円運動のパスを作成（反時計回りに設定）
+        let circularPath = UIBezierPath(arcCenter: CGPoint(x: 200, y: 250), radius: 3, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
 
         // 円運動のアニメーション
         let circularMotion = CAKeyframeAnimation(keyPath: "position")
         circularMotion.path = circularPath.cgPath
-        circularMotion.duration = 0.7
+        circularMotion.duration = 0.6
         circularMotion.repeatCount = .infinity
         circularMotion.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
 
         // アニメーションを背景のUIImageViewのレイヤーに追加
         backGroundDancingImageView.layer.add(circularMotion, forKey: "circularMotion")
     }
+
 }
 #Preview {
     let viewController = CoreAnimationViewController()
