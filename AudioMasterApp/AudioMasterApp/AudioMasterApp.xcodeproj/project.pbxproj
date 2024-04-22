@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		6100F2132BB4F437005AA35D /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6100F2122BB4F437005AA35D /* CameraPreview.swift */; };
 		610329F92B9D379D00EBB3AC /* AVSpeechSynthesizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610329F82B9D379D00EBB3AC /* AVSpeechSynthesizerView.swift */; };
-		6105624D2BCB7BF100D82088 /* animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105624C2BCB7BF100D82088 /* animation.swift */; };
+		6105624D2BCB7BF100D82088 /* CoreAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105624C2BCB7BF100D82088 /* CoreAnimationViewController.swift */; };
 		61193CC22B58B9F200DD324C /* AudioMasterAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61193CC12B58B9F200DD324C /* AudioMasterAppApp.swift */; };
 		61193CC42B58B9F200DD324C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61193CC32B58B9F200DD324C /* ContentView.swift */; };
 		61193CC62B58B9F400DD324C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61193CC52B58B9F400DD324C /* Assets.xcassets */; };
@@ -28,6 +28,7 @@
 		617999A82B85869C00A72630 /* RtcBasic in Frameworks */ = {isa = PBXBuildFile; productRef = 617999A72B85869C00A72630 /* RtcBasic */; };
 		619AE5FB2BAD697A00CE4C4C /* VideoCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619AE5FA2BAD697A00CE4C4C /* VideoCaptureView.swift */; };
 		619AE5FE2BAD6B8D00CE4C4C /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619AE5FD2BAD6B8D00CE4C4C /* VideoView.swift */; };
+		61AE6CDC2BD6A0FF0029F015 /* CoreAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE6CDB2BD6A0FF0029F015 /* CoreAnimationView.swift */; };
 		61B15DB62BC144F10009EB6A /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = 61B15DB52BC144F10009EB6A /* WhisperKit */; };
 		61B15DB82BC1472B0009EB6A /* WhisperKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B15DB72BC1472B0009EB6A /* WhisperKitView.swift */; };
 		61B15DBE2BC14C2F0009EB6A /* whisper_sample.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 61B15DBD2BC14C2F0009EB6A /* whisper_sample.mp3 */; };
@@ -59,7 +60,7 @@
 /* Begin PBXFileReference section */
 		6100F2122BB4F437005AA35D /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
 		610329F82B9D379D00EBB3AC /* AVSpeechSynthesizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVSpeechSynthesizerView.swift; sourceTree = "<group>"; };
-		6105624C2BCB7BF100D82088 /* animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = animation.swift; sourceTree = "<group>"; };
+		6105624C2BCB7BF100D82088 /* CoreAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimationViewController.swift; sourceTree = "<group>"; };
 		61193CBE2B58B9F200DD324C /* AudioMasterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioMasterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61193CC12B58B9F200DD324C /* AudioMasterAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMasterAppApp.swift; sourceTree = "<group>"; };
 		61193CC32B58B9F200DD324C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,6 +81,7 @@
 		619AE5FA2BAD697A00CE4C4C /* VideoCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCaptureView.swift; sourceTree = "<group>"; };
 		619AE5FC2BAD69C900CE4C4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		619AE5FD2BAD6B8D00CE4C4C /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		61AE6CDB2BD6A0FF0029F015 /* CoreAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimationView.swift; sourceTree = "<group>"; };
 		61B15DB72BC1472B0009EB6A /* WhisperKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhisperKitView.swift; sourceTree = "<group>"; };
 		61B15DBD2BC14C2F0009EB6A /* whisper_sample.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = whisper_sample.mp3; sourceTree = "<group>"; };
 		61B255242B90102400796515 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
@@ -132,7 +134,8 @@
 				61DFB7952BAEBCA800A4868F /* AudioProcessorView.swift */,
 				61B15DB72BC1472B0009EB6A /* WhisperKitView.swift */,
 				61CFB6E22BC587C100849C47 /* PiPVideoPlayerView.swift */,
-				6105624C2BCB7BF100D82088 /* animation.swift */,
+				6105624C2BCB7BF100D82088 /* CoreAnimationViewController.swift */,
+				61AE6CDB2BD6A0FF0029F015 /* CoreAnimationView.swift */,
 			);
 			path = AVF;
 			sourceTree = "<group>";
@@ -374,8 +377,9 @@
 				61DFB7962BAEBCA800A4868F /* AudioProcessorView.swift in Sources */,
 				610329F92B9D379D00EBB3AC /* AVSpeechSynthesizerView.swift in Sources */,
 				619AE5FE2BAD6B8D00CE4C4C /* VideoView.swift in Sources */,
-				6105624D2BCB7BF100D82088 /* animation.swift in Sources */,
+				6105624D2BCB7BF100D82088 /* CoreAnimationViewController.swift in Sources */,
 				617999A52B85859000A72630 /* AgoraVideoViewController.swift in Sources */,
+				61AE6CDC2BD6A0FF0029F015 /* CoreAnimationView.swift in Sources */,
 				61523A7E2BBB821C0083B486 /* CameraPreviewContentView.swift in Sources */,
 				61193CC42B58B9F200DD324C /* ContentView.swift in Sources */,
 				61DFB7942BAEBC8D00A4868F /* AudioProcessorViewModel.swift in Sources */,

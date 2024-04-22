@@ -38,6 +38,10 @@ struct ContentView: View {
                 NavigationLink(destination:  CameraPreviewContentView()) {
                     Text("Show CameraPreviewContentView")
                 }
+
+                NavigationLink(destination:  CoreAnimationView()) {
+                    Text("Show CoreAnimationView")
+                }
             }
             .navigationBarTitle("Main View", displayMode: .inline)
         }
