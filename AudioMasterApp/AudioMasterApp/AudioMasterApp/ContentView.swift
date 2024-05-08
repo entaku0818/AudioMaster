@@ -42,6 +42,10 @@ struct ContentView: View {
                 NavigationLink(destination:  CoreAnimationView()) {
                     Text("Show CoreAnimationView")
                 }
+
+                NavigationLink(destination:  BluetoothDevicesView()) {
+                    Text("Show BluetoothDevicesView")
+                }
             }
             .navigationBarTitle("Main View", displayMode: .inline)
         }
