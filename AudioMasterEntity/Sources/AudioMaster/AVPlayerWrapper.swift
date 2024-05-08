@@ -44,7 +44,6 @@ public class AVPlayerWrapper {
     public init(urls: [URL]) {
       self.playerItems = urls.map { AVPlayerItem(url: $0) }
       setupEndPlaybackObserver()
-      loadNextItem()
     }
 
     deinit {

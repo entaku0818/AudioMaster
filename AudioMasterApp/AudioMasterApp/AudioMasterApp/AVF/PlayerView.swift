@@ -8,7 +8,7 @@
 import SwiftUI
 import AVKit
 import AudioMaster
-
+import Foundation
 
 struct PlayerView: View {
     private let player:AVPlayerWrapper
@@ -16,8 +16,9 @@ struct PlayerView: View {
     init() {
         player = AVPlayerWrapper(urls:
                 [
+                    URL.init(string: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")!,
                     Bundle.main.url(forResource: "sample", withExtension: "mp4")!,
-                    Bundle.main.url(forResource: "sample2", withExtension: "mp4")!
+                    Bundle.main.url(forResource: "sample2", withExtension: "mp4")!,
                 ]
         )
     }
