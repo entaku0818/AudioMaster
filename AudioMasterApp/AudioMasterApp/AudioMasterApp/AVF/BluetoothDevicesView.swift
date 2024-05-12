@@ -16,6 +16,7 @@ struct BluetoothDevicesView: View {
         NavigationView {
             List(devices, id: \.identifier) { device in
                 Text(device.name ?? "Unknown Device")
+                Text(device.identifier.uuidString)
             }
             .navigationBarTitle("Bluetooth Devices")
             .onAppear {
