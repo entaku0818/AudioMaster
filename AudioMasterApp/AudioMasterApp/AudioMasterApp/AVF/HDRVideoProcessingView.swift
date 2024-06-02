@@ -1,109 +1,110 @@
-//
-//  HDRVideoProcessingView.swift
-//  AudioMasterApp
-//
-//  Created by 遠藤拓弥 on 2024/06/02.
-//
 
 import SwiftUI
-import AVFoundation
+import AVKit
+import Photos
 import PhotosUI
-import _AVKit_SwiftUI
+import SwiftUI
+import AVKit
+import Photos
+import PhotosUI
 
 struct HDRVideoProcessingView: View {
+    @State private var videoURL: URL?
+    @State private var player: AVPlayer?
+    @State private var isPickerPresented = false
+
     var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                NavigationLink(destination: HDRVideoCaptureView()) {
-                    Text("Capture HDR Video")
-                        .font(.system(size: 20))
+        VStack {
+            if let player = player {
+                VideoPlayer(player: player)
+                    .frame(height: 300)
+                    .onAppear {
+                        player.play()
+                    }
+            } else {
+                Text("No video selected")
+                    .frame(height: 300)
+            }
+
+            HStack {
+                Button(action: { isPickerPresented.toggle() }) {
+                    Text("Load Video")
                         .padding()
                         .background(Color.blue)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .cornerRadius(8)
+                }
+                .padding()
+                .sheet(isPresented: $isPickerPresented) {
+                    VideoPicker(videoURL: $videoURL, player: $player)
                 }
 
-                NavigationLink(destination: HDRVideoPlaybackView()) {
-                    Text("Playback HDR Video")
-                        .font(.system(size: 20))
+                Button(action: exportSDRVideo) {
+                    Text("Export SDR Video")
                         .padding()
                         .background(Color.green)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .cornerRadius(8)
                 }
+                .padding()
+                .disabled(videoURL == nil)
+            }
+        }
+    }
 
-                NavigationLink(destination: HDRVideoEditView()) {
-                    Text("Edit HDR Video")
-                        .font(.system(size: 20))
-                        .padding()
-                        .background(Color.orange)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+    private func exportSDRVideo() {
+        guard let videoURL = videoURL else { return }
+
+        let asset = AVAsset(url: videoURL)
+        guard let exportSession = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality) else {
+            print("Failed to create export session")
+            return
+        }
+
+        // ユニークなファイル名を使用して一時ファイルを生成
+        let outputURL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension("mov")
+
+        exportSession.outputURL = outputURL
+        exportSession.outputFileType = .mov
+        exportSession.shouldOptimizeForNetworkUse = true
+
+        exportSession.exportAsynchronously {
+            switch exportSession.status {
+            case .completed:
+                print("Export completed successfully")
+                self.saveVideoToPhotoLibrary(outputURL)
+            case .failed:
+                if let error = exportSession.error {
+                    print("Export failed: \(error.localizedDescription)")
                 }
-            }
-            .navigationTitle("HDR Video Processing")
-        }
-    }
-}
-
-struct HDRVideoCaptureView: View {
-    var body: some View {
-        VStack {
-            Text("Capture HDR Video")
-                .font(.largeTitle)
-                .padding()
-            // ビデオキャプチャのUIと機能をここに追加
-        }
-        .navigationTitle("Capture HDR Video")
-    }
-}
-
-struct HDRVideoPlaybackView: View {
-    var body: some View {
-        VStack {
-            Text("Playback HDR Video")
-                .font(.largeTitle)
-                .padding()
-            // ビデオ再生のUIと機能をここに追加
-        }
-        .navigationTitle("Playback HDR Video")
-    }
-}
-
-struct HDRVideoEditView: View {
-    @State private var isPickerPresented = false
-    @State private var videoURL: URL?
-
-    var body: some View {
-        VStack {
-            if let videoURL = videoURL {
-                Text("Selected video: \(videoURL.lastPathComponent)")
-                    .padding()
-            } else {
-                Text("No video selected")
-                    .padding()
-            }
-
-            Button(action: {
-                isPickerPresented = true
-            }) {
-                Text("Select Video")
-                    .font(.system(size: 20))
-                    .padding()
-                    .background(Color.purple)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+            case .cancelled:
+                print("Export cancelled")
+            default:
+                break
             }
         }
-        .navigationTitle("Edit HDR Video")
-        .sheet(isPresented: $isPickerPresented) {
-            VideoPickerView(videoURL: $videoURL)
+    }
+
+    private func saveVideoToPhotoLibrary(_ url: URL) {
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+        }) { success, error in
+            if success {
+                print("Video saved to Photo Library")
+            } else if let error = error {
+                print("Error saving video to Photo Library: \(error.localizedDescription)")
+            }
         }
     }
 }
 
-struct VideoPickerView: UIViewControllerRepresentable {
+struct VideoPicker: UIViewControllerRepresentable {
     @Binding var videoURL: URL?
+    @Binding var player: AVPlayer?
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
 
     func makeUIViewController(context: Context) -> PHPickerViewController {
         var config = PHPickerConfiguration()
@@ -115,25 +116,44 @@ struct VideoPickerView: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
 
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
     class Coordinator: NSObject, PHPickerViewControllerDelegate {
-        var parent: VideoPickerView
+        var parent: VideoPicker
 
-        init(_ parent: VideoPickerView) {
+        init(_ parent: VideoPicker) {
             self.parent = parent
         }
 
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            picker.dismiss(animated: true)
-            guard let provider = results.first?.itemProvider else { return }
-            if provider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
-                provider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { (url, error) in
-                    DispatchQueue.main.async {
-                        self.parent.videoURL = url
+            picker.dismiss(animated: true, completion: nil)
+
+            guard let result = results.first else { return }
+
+            result.itemProvider.loadFileRepresentation(forTypeIdentifier: "public.movie") { url, error in
+                if let error = error {
+                    print("Error loading video: \(error.localizedDescription)")
+                    return
+                }
+
+                guard let url = url else {
+                    print("No URL found")
+                    return
+                }
+
+                // Ensure the URL is a local file
+                let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension("mov")
+
+                do {
+                    // Remove existing file if it exists
+                    if FileManager.default.fileExists(atPath: tempURL.path) {
+                        try FileManager.default.removeItem(at: tempURL)
                     }
+                    try FileManager.default.copyItem(at: url, to: tempURL)
+                    DispatchQueue.main.async {
+                        self.parent.videoURL = tempURL
+                        self.parent.player = AVPlayer(url: tempURL)
+                    }
+                } catch {
+                    print("Error copying file: \(error.localizedDescription)")
                 }
             }
         }

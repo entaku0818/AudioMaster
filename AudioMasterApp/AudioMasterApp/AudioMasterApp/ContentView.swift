@@ -46,6 +46,9 @@ struct ContentView: View {
                 NavigationLink(destination:  BluetoothDevicesView()) {
                     Text("Show BluetoothDevicesView")
                 }
+                NavigationLink(destination:  HDRVideoProcessingView()) {
+                    Text("Show HDRVideoProcessingView")
+                }
             }
             .navigationBarTitle("Main View", displayMode: .inline)
         }
