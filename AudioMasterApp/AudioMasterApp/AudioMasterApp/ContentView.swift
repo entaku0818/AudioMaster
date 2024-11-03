@@ -49,6 +49,9 @@ struct ContentView: View {
                 NavigationLink(destination:  HDRVideoProcessingView()) {
                     Text("Show HDRVideoProcessingView")
                 }
+                NavigationLink("Audio Settings") {
+                    AudioSessionSettingsView()
+                }
             }
             .navigationBarTitle("Main View", displayMode: .inline)
         }

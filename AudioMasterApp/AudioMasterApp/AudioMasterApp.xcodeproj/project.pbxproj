@@ -13,6 +13,7 @@
 		610CAA372BF8D63D00C06EEC /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610CAA362BF8D63D00C06EEC /* MetalViewController.swift */; };
 		610CAA392BF8D72B00C06EEC /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 610CAA382BF8D72B00C06EEC /* Shader.metal */; };
 		610CAA3C2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610CAA3B2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift */; };
+		6115A0BE2CD70DA700554C0F /* AVAudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6115A0BD2CD70DA700554C0F /* AVAudioSession.swift */; };
 		61193CC22B58B9F200DD324C /* AudioMasterAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61193CC12B58B9F200DD324C /* AudioMasterAppApp.swift */; };
 		61193CC42B58B9F200DD324C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61193CC32B58B9F200DD324C /* ContentView.swift */; };
 		61193CC62B58B9F400DD324C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61193CC52B58B9F400DD324C /* Assets.xcassets */; };
@@ -70,6 +71,7 @@
 		610CAA362BF8D63D00C06EEC /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
 		610CAA382BF8D72B00C06EEC /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 		610CAA3B2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeAudioRecorder.swift; sourceTree = "<group>"; };
+		6115A0BD2CD70DA700554C0F /* AVAudioSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAudioSession.swift; sourceTree = "<group>"; };
 		61193CBE2B58B9F200DD324C /* AudioMasterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioMasterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61193CC12B58B9F200DD324C /* AudioMasterAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMasterAppApp.swift; sourceTree = "<group>"; };
 		61193CC32B58B9F200DD324C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				6144A9072BEBB18D00D16123 /* BluetoothManager.swift */,
 				610CAA3B2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift */,
 				615EEF762C0BF81D00E0E74F /* HDRVideoProcessingView.swift */,
+				6115A0BD2CD70DA700554C0F /* AVAudioSession.swift */,
 			);
 			path = AVF;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 			files = (
 				61523A802BBB82410083B486 /* ImageView.swift in Sources */,
 				6167018E2B82E06A004D8C59 /* AnimateViewController.swift in Sources */,
+				6115A0BE2CD70DA700554C0F /* AVAudioSession.swift in Sources */,
 				6100F2132BB4F437005AA35D /* CameraPreview.swift in Sources */,
 				61CFB6E32BC587C100849C47 /* PiPVideoPlayerView.swift in Sources */,
 				610CAA3C2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift in Sources */,
