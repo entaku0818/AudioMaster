@@ -52,6 +52,9 @@ struct ContentView: View {
                 NavigationLink("Audio Settings") {
                     AudioSessionSettingsView()
                 }
+                NavigationLink("Test Audio Settings") {
+                    AudioSessionTestView()
+                }
             }
             .navigationBarTitle("Main View", displayMode: .inline)
         }
