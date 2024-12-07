@@ -19,29 +19,13 @@ struct AudioSessionDemoView: View {
         ("通常のバックグラウンド再生", {
             AudioSessionController.shared.configureStandardPlayback()
         }),
-        ("他のアプリを優先して再生", {
+        ("他のアプリの音声を小さくして再生", {
             AudioSessionController.shared.configureRespectOtherApps()
         }),
         ("自アプリを優先して再生", {
             AudioSessionController.shared.configurePrioritizeOurAudio()
         }),
 
-        // 特殊な用途の設定テスト
-        ("録音テスト", {
-            AudioSessionController.shared.configureRecording()
-        }),
-        ("ゲームサウンドテスト", {
-            AudioSessionController.shared.configureGameSound()
-        }),
-        ("ビデオ会議テスト", {
-            AudioSessionController.shared.configureVideoConference()
-        }),
-        ("ポッドキャストテスト", {
-            AudioSessionController.shared.configurePodcast()
-        }),
-        ("音声メッセージテスト", {
-            AudioSessionController.shared.configureVoiceMessage()
-        }),
         ("読み上げテスト", {
             AudioSessionController.shared.configureTextToSpeech(
                 text: "こんにちは。これはテキスト読み上げのテストです。"

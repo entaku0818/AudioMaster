@@ -21,6 +21,12 @@ class AudioSessionController: NSObject, ObservableObject {
     private var audioPlayer: AVAudioPlayer?
     private var audioRecorder: AVAudioRecorder?
 
+    // 追加：音声合成関連
+    private let speechSynthesizer = AVSpeechSynthesizer()
+    @Published var isSpeaking = false
+
+    private let defaultVoice = AVSpeechSynthesisVoice(language: "ja-JP")
+
     private override init() {
         super.init()
         setupNotifications()
@@ -74,7 +80,7 @@ class AudioSessionController: NSObject, ObservableObject {
         }
     }
 
-    /// 他のアプリの音声を優先する設定（自アプリの音声は自動的に音量を下げる）
+    /// 他のアプリの音声を小さくして残す
     func configureRespectOtherApps() {
         do {
             audioPlayer?.stop()
@@ -83,8 +89,7 @@ class AudioSessionController: NSObject, ObservableObject {
             try audioSession.setCategory(
                 .playback,
                 options: [
-                    .duckOthers,          // 他のアプリの音声が来たら自動で音量を下げる
-                    .mixWithOthers        // 同時再生を許可
+                    .duckOthers,
                 ]
             )
             try audioSession.setActive(true)
@@ -97,7 +102,7 @@ class AudioSessionController: NSObject, ObservableObject {
         }
     }
 
-    /// 自アプリの音声を優先する設定（他のアプリの音声は自動的に音量を下げる）
+    ///
     func configurePrioritizeOurAudio() {
         do {
             audioPlayer?.stop()
@@ -105,11 +110,12 @@ class AudioSessionController: NSObject, ObservableObject {
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(
                 .playback,
+                mode: .spokenAudio,
                 options: [
-                    .interruptSpokenAudioAndMixWithOthers  // 他のアプリの音声を中断
+                    .interruptSpokenAudioAndMixWithOthers
                 ]
             )
-            try audioSession.setActive(true)
+            try audioSession.setActive(true, options: [.notifyOthersOnDeactivation])
 
             logger.info("Configured playback to prioritize our audio")
             audioPlayer?.play()
@@ -118,117 +124,6 @@ class AudioSessionController: NSObject, ObservableObject {
             logger.error("Failed to configure prioritize our audio mode: \(error.localizedDescription)")
         }
     }
-
-
-    func configureRecording() {
-        if !isRecording {
-            AVAudioSession.sharedInstance().requestRecordPermission { [weak self] allowed in
-                guard let self = self else { return }
-
-                if allowed {
-                    self.logger.info("Microphone permission granted")
-                    do {
-                        try self.startRecording()
-                        self.logger.info("Started recording successfully")
-                    } catch {
-                        self.logger.error("Failed to start recording: \(error.localizedDescription)")
-                    }
-                } else {
-                    self.logger.warning("Microphone permission denied")
-                }
-            }
-        }
-    }
-
-    private func startRecording() throws {
-        let audioSession = AVAudioSession.sharedInstance()
-        try audioSession.setCategory(.playAndRecord)
-        try audioSession.setActive(true)
-        logger.debug("Audio session configured for recording")
-        isRecording = true
-    }
-
-    func configureNotificationSound() {
-        do {
-            let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.ambient)
-            try audioSession.setActive(true)
-
-            logger.info("Configured audio session for notification sound")
-            audioPlayer?.play()
-            logger.info("Started notification sound playback")
-        } catch {
-            logger.error("Failed to play notification sound: \(error.localizedDescription)")
-        }
-    }
-
-    func configureGameSound() {
-        do {
-            audioPlayer?.stop()
-
-            let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.ambient, options: [.mixWithOthers])
-            try audioSession.setActive(true)
-
-            logger.info("Configured audio session for game sound")
-            audioPlayer?.play()
-            logger.info("Started game sound playback")
-        } catch {
-            logger.error("Failed to configure game sound: \(error.localizedDescription)")
-        }
-    }
-
-    func configureVideoConference() {
-        do {
-            let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.playAndRecord,
-                                   mode: .voiceChat,
-                                   options: [.allowBluetooth, .defaultToSpeaker])
-            try audioSession.setActive(true)
-
-            logger.info("Configured audio session for video conference")
-            audioPlayer?.play()
-            logger.info("Started video conference playback")
-        } catch {
-            logger.error("Failed to configure video conference: \(error.localizedDescription)")
-        }
-    }
-
-    func configurePodcast() {
-        do {
-            let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.playback,
-                                   options: [.allowAirPlay, .allowBluetoothA2DP])
-            try audioSession.setActive(true)
-
-            logger.info("Configured audio session for podcast playback")
-            audioPlayer?.play()
-            logger.info("Started podcast playback")
-        } catch {
-            logger.error("Failed to configure podcast playback: \(error.localizedDescription)")
-        }
-    }
-
-    func configureVoiceMessage() {
-        do {
-            let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.playAndRecord,
-                                   mode: .voiceChat,
-                                   options: [.allowBluetooth, .overrideMutedMicrophoneInterruption])
-            try audioSession.setActive(true)
-
-            logger.info("Configured audio session for voice message")
-            audioPlayer?.play()
-            logger.info("Started voice message playback")
-        } catch {
-            logger.error("Failed to configure voice message: \(error.localizedDescription)")
-        }
-    }
-    // 追加：音声合成関連
-    private let speechSynthesizer = AVSpeechSynthesizer()
-    @Published var isSpeaking = false
-
-    private let defaultVoice = AVSpeechSynthesisVoice(language: "ja-JP")
 
     func configureTextToSpeech(text: String) {
         do {
