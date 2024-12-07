@@ -25,23 +25,44 @@ struct ContentView: View {
         MenuItem(title: "Bluetooth デバイス", destination: BluetoothDevicesView()),
         MenuItem(title: "HDR 動画処理", destination: HDRVideoProcessingView()),
         MenuItem(title: "オーディオ設定", destination: AudioSessionSettingsView()),
-        MenuItem(title: "オーディオテスト", destination: AudioSessionTestView())
+        MenuItem(title: "AVAudioSession Test", destination: AudioSessionTestView()),
+        MenuItem(title: "AVAudioSession Demo", destination: AudioSessionDemoView())
+
     ]
 
-    var body: some View {
-        NavigationView {
-            List(menuItems) { item in
-                NavigationLink(destination: item.destination) {
-                    HStack {
-                        Text(item.title)
-                            .font(.body)
-                    }
-                }
-            }
-            .navigationBarTitle("オーディオマスター", displayMode: .large)
-            .listStyle(InsetGroupedListStyle())
-        }
-    }
+    // クレジット情報
+      let credits = """
+          BGM Credit:
+          Title: whisper_sample
+          Created by: フリーBGM MOMIZizm MUSiC
+          Source: http://momizizm.com/
+          License: フリーBGM MOMIZizm MUSiCの利用規約に基づく使用
+          """
+
+      var body: some View {
+          NavigationView {
+              List {
+                  // メインメニュー
+                  ForEach(menuItems) { item in
+                      NavigationLink(destination: item.destination) {
+                          HStack {
+                              Text(item.title)
+                                  .font(.body)
+                          }
+                      }
+                  }
+
+                  // クレジットセクション
+                  Section(header: Text("Credits")) {
+                      Text(credits)
+                          .font(.footnote)
+                          .foregroundColor(.secondary)
+                  }
+              }
+              .navigationBarTitle("オーディオマスター", displayMode: .large)
+              .listStyle(InsetGroupedListStyle())
+          }
+      }
 }
 
 #Preview {

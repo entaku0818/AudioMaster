@@ -13,6 +13,9 @@
 		610CAA372BF8D63D00C06EEC /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610CAA362BF8D63D00C06EEC /* MetalViewController.swift */; };
 		610CAA392BF8D72B00C06EEC /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 610CAA382BF8D72B00C06EEC /* Shader.metal */; };
 		610CAA3C2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610CAA3B2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift */; };
+		6112044A2D03E83500215F43 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611204492D03E83500215F43 /* AudioManager.swift */; };
+		6112044D2D03E8E200215F43 /* AudioSessionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6112044C2D03E8E200215F43 /* AudioSessionDemoView.swift */; };
+		6112044F2D03ECA700215F43 /* sfc-harukanaru-daichi_Loop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6112044E2D03ECA700215F43 /* sfc-harukanaru-daichi_Loop.mp3 */; };
 		6115A0BE2CD70DA700554C0F /* AVAudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6115A0BD2CD70DA700554C0F /* AVAudioSession.swift */; };
 		6115A0C02CD71C8600554C0F /* AudioSessionTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6115A0BF2CD71C8600554C0F /* AudioSessionTestView.swift */; };
 		61193CC22B58B9F200DD324C /* AudioMasterAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61193CC12B58B9F200DD324C /* AudioMasterAppApp.swift */; };
@@ -72,6 +75,9 @@
 		610CAA362BF8D63D00C06EEC /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
 		610CAA382BF8D72B00C06EEC /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 		610CAA3B2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeAudioRecorder.swift; sourceTree = "<group>"; };
+		611204492D03E83500215F43 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		6112044C2D03E8E200215F43 /* AudioSessionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSessionDemoView.swift; sourceTree = "<group>"; };
+		6112044E2D03ECA700215F43 /* sfc-harukanaru-daichi_Loop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sfc-harukanaru-daichi_Loop.mp3"; sourceTree = "<group>"; };
 		6115A0BD2CD70DA700554C0F /* AVAudioSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAudioSession.swift; sourceTree = "<group>"; };
 		6115A0BF2CD71C8600554C0F /* AudioSessionTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSessionTestView.swift; sourceTree = "<group>"; };
 		61193CBE2B58B9F200DD324C /* AudioMasterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioMasterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +146,7 @@
 		610329F72B9D371C00EBB3AC /* AVF */ = {
 			isa = PBXGroup;
 			children = (
+				6112044B2D03E8CF00215F43 /* AudioSesstion */,
 				61523A7C2BBB820A0083B486 /* CameraPreview */,
 				6138E0752BB1C39600DA0398 /* VideoView */,
 				613D9FD82B7C442200D17DDC /* SoundAnimationView.swift */,
@@ -170,6 +177,15 @@
 				610CAA382BF8D72B00C06EEC /* Shader.metal */,
 			);
 			path = Metal;
+			sourceTree = "<group>";
+		};
+		6112044B2D03E8CF00215F43 /* AudioSesstion */ = {
+			isa = PBXGroup;
+			children = (
+				611204492D03E83500215F43 /* AudioManager.swift */,
+				6112044C2D03E8E200215F43 /* AudioSessionDemoView.swift */,
+			);
+			path = AudioSesstion;
 			sourceTree = "<group>";
 		};
 		61193CB52B58B9F200DD324C = {
@@ -203,6 +219,7 @@
 				61193CC32B58B9F200DD324C /* ContentView.swift */,
 				61193CC52B58B9F400DD324C /* Assets.xcassets */,
 				61B15DBD2BC14C2F0009EB6A /* whisper_sample.mp3 */,
+				6112044E2D03ECA700215F43 /* sfc-harukanaru-daichi_Loop.mp3 */,
 				61B255282B90117600796515 /* sample.mp4 */,
 				61CFB6E02BC4C5A400849C47 /* sample2.mp4 */,
 				61193CC72B58B9F400DD324C /* Preview Content */,
@@ -371,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61CFB6E12BC4C74900849C47 /* sample2.mp4 in Resources */,
+				6112044F2D03ECA700215F43 /* sfc-harukanaru-daichi_Loop.mp3 in Resources */,
 				61193CC92B58B9F400DD324C /* Preview Assets.xcassets in Resources */,
 				61B255292B90136800796515 /* sample.mp4 in Resources */,
 				61193CC62B58B9F400DD324C /* Assets.xcassets in Resources */,
@@ -404,6 +422,7 @@
 				6115A0BE2CD70DA700554C0F /* AVAudioSession.swift in Sources */,
 				6100F2132BB4F437005AA35D /* CameraPreview.swift in Sources */,
 				61CFB6E32BC587C100849C47 /* PiPVideoPlayerView.swift in Sources */,
+				6112044A2D03E83500215F43 /* AudioManager.swift in Sources */,
 				610CAA3C2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift in Sources */,
 				61B15DB82BC1472B0009EB6A /* WhisperKitView.swift in Sources */,
 				615702652B8873C700096E5F /* VolumeVisualizerView.swift in Sources */,
@@ -423,6 +442,7 @@
 				610CAA372BF8D63D00C06EEC /* MetalViewController.swift in Sources */,
 				6115A0C02CD71C8600554C0F /* AudioSessionTestView.swift in Sources */,
 				61193CC42B58B9F200DD324C /* ContentView.swift in Sources */,
+				6112044D2D03E8E200215F43 /* AudioSessionDemoView.swift in Sources */,
 				61DFB7942BAEBC8D00A4868F /* AudioProcessorViewModel.swift in Sources */,
 				615EEF772C0BF81D00E0E74F /* HDRVideoProcessingView.swift in Sources */,
 				613D9FD92B7C442200D17DDC /* SoundAnimationView.swift in Sources */,
@@ -595,6 +615,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AudioMasterApp/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "\"\"";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Bluetoothに接続します";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = aaaa;
@@ -631,6 +652,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AudioMasterApp/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "\"\"";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Bluetoothに接続します";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = aaaa;
