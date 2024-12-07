@@ -16,15 +16,37 @@ struct AudioSessionDemoView: View {
     @State private var alertMessage = ""
 
     let audioConfigs: [(title: String, action: () -> Void)] = [
-        ("バックグラウンド再生", { AudioSessionController.shared.configureBackgroundPlayback() }),
-        ("他アプリと同時再生", { AudioSessionController.shared.configureMixWithOthers() }),
-        ("録音テスト", { AudioSessionController.shared.configureRecording() }),
-        ("通知音テスト", { AudioSessionController.shared.configureNotificationSound() }),
-        ("ゲームサウンドテスト", { AudioSessionController.shared.configureGameSound() }),
-        ("ビデオ会議テスト", { AudioSessionController.shared.configureVideoConference() }),
-        ("ポッドキャストテスト", { AudioSessionController.shared.configurePodcast() }),
-        ("音声メッセージテスト", { AudioSessionController.shared.configureVoiceMessage() }),
-        ("読み上げテスト", { AudioSessionController.shared.configureTextToSpeech() })
+        ("通常のバックグラウンド再生", {
+            AudioSessionController.shared.configureStandardPlayback()
+        }),
+        ("他のアプリを優先して再生", {
+            AudioSessionController.shared.configureRespectOtherApps()
+        }),
+        ("自アプリを優先して再生", {
+            AudioSessionController.shared.configurePrioritizeOurAudio()
+        }),
+
+        // 特殊な用途の設定テスト
+        ("録音テスト", {
+            AudioSessionController.shared.configureRecording()
+        }),
+        ("ゲームサウンドテスト", {
+            AudioSessionController.shared.configureGameSound()
+        }),
+        ("ビデオ会議テスト", {
+            AudioSessionController.shared.configureVideoConference()
+        }),
+        ("ポッドキャストテスト", {
+            AudioSessionController.shared.configurePodcast()
+        }),
+        ("音声メッセージテスト", {
+            AudioSessionController.shared.configureVoiceMessage()
+        }),
+        ("読み上げテスト", {
+            AudioSessionController.shared.configureTextToSpeech(
+                text: "こんにちは。これはテキスト読み上げのテストです。"
+            )
+        })
     ]
 
     var body: some View {
@@ -60,19 +82,18 @@ struct AudioSessionDemoView: View {
         alertMessage = message
         showAlert = true
     }
-
     private func getMessageForAction(_ title: String) -> String {
         switch title {
-        case "バックグラウンド再生":
-            return "ホームに戻って動作確認してください"
-        case "他アプリと同時再生":
-            return "他のアプリの音声と混ざることを確認してください"
+        case "通常のバックグラウンド再生":
+            return "ホームに戻って音声が継続することを確認してください"
+        case "他のアプリを優先して再生":
+            return "他のアプリで音声を再生すると、このアプリの音量が自動的に下がります"
+        case "自アプリを優先して再生":
+            return "このアプリの音声が優先され、他のアプリの音量が自動的に下がります"
         case "録音テスト":
             return audioManager.isRecording ? "録音を停止しました" : "録音を開始しました"
-        case "通知音テスト":
-            return "他のアプリの音声を妨げないことを確認してください"
         case "ゲームサウンドテスト":
-            return "バックグラウンドで停止することを確認してください"
+            return "低遅延の音声再生が有効になっています"
         case "ビデオ会議テスト":
             return "スピーカーモードとエコーキャンセリングが有効になっています"
         case "ポッドキャストテスト":
@@ -80,7 +101,7 @@ struct AudioSessionDemoView: View {
         case "音声メッセージテスト":
             return "近接センサーでのスピーカー切り替えが有効です"
         case "読み上げテスト":
-            return "他のアプリの音量が自動的に下がることを確認してください"
+            return "音声読み上げを開始します。他のアプリの音量は自動的に下がります"
         default:
             return "設定を適用しました"
         }

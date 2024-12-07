@@ -9,11 +9,7 @@ import Foundation
 import AVFoundation
 import os.log
 
-import Foundation
-import AVFoundation
-import os.log
-
-class AudioSessionController: ObservableObject {
+class AudioSessionController: NSObject, ObservableObject {
     static let shared = AudioSessionController()
 
     private let logger = Logger(
@@ -25,9 +21,11 @@ class AudioSessionController: ObservableObject {
     private var audioPlayer: AVAudioPlayer?
     private var audioRecorder: AVAudioRecorder?
 
-    private init() {
+    private override init() {
+        super.init()
         setupNotifications()
         setupAudioPlayer()
+        speechSynthesizer.delegate = self
     }
 
     // MARK: - Setup Methods
@@ -56,36 +54,68 @@ class AudioSessionController: ObservableObject {
     }
 
     // MARK: - Audio Session Configuration Methods
-    func configureBackgroundPlayback() {
+    func configureStandardPlayback() {
         do {
             audioPlayer?.stop()
             try checkBackgroundAudioConfiguration()
+
             let audioSession = AVAudioSession.sharedInstance()
+            // 基本的なplaybackカテゴリの設定
             try audioSession.setCategory(.playback)
             try audioSession.setActive(true)
 
-            logger.info("Configured audio session for background playback")
+            logger.info("Configured standard background playback")
             audioPlayer?.play()
-            logger.info("Started background playback successfully")
+            logger.info("Started standard playback successfully")
         } catch let error as ConfigurationError {
             logger.error("\(error.localizedDescription)")
         } catch {
-            logger.error("Failed to configure background playback: \(error.localizedDescription)")
+            logger.error("Failed to configure standard playback: \(error.localizedDescription)")
         }
     }
 
-    func configureMixWithOthers() {
+    /// 他のアプリの音声を優先する設定（自アプリの音声は自動的に音量を下げる）
+    func configureRespectOtherApps() {
         do {
             audioPlayer?.stop()
+
             let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.playback, options: [.mixWithOthers])
+            try audioSession.setCategory(
+                .playback,
+                options: [
+                    .duckOthers,          // 他のアプリの音声が来たら自動で音量を下げる
+                    .mixWithOthers        // 同時再生を許可
+                ]
+            )
             try audioSession.setActive(true)
 
-            logger.info("Configured audio session with mixWithOthers option")
+            logger.info("Configured playback to respect other apps")
             audioPlayer?.play()
-            logger.info("Started playback with mixWithOthers successfully")
+            logger.info("Started playback with lower priority")
         } catch {
-            logger.error("Failed to configure mixWithOthers playback: \(error.localizedDescription)")
+            logger.error("Failed to configure respect other apps mode: \(error.localizedDescription)")
+        }
+    }
+
+    /// 自アプリの音声を優先する設定（他のアプリの音声は自動的に音量を下げる）
+    func configurePrioritizeOurAudio() {
+        do {
+            audioPlayer?.stop()
+
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(
+                .playback,
+                options: [
+                    .interruptSpokenAudioAndMixWithOthers  // 他のアプリの音声を中断
+                ]
+            )
+            try audioSession.setActive(true)
+
+            logger.info("Configured playback to prioritize our audio")
+            audioPlayer?.play()
+            logger.info("Started playback with high priority")
+        } catch {
+            logger.error("Failed to configure prioritize our audio mode: \(error.localizedDescription)")
         }
     }
 
@@ -194,19 +224,43 @@ class AudioSessionController: ObservableObject {
             logger.error("Failed to configure voice message: \(error.localizedDescription)")
         }
     }
+    // 追加：音声合成関連
+    private let speechSynthesizer = AVSpeechSynthesizer()
+    @Published var isSpeaking = false
 
-    func configureTextToSpeech() {
+    private let defaultVoice = AVSpeechSynthesisVoice(language: "ja-JP")
+
+    func configureTextToSpeech(text: String) {
         do {
             let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.playback,
-                                   options: [.mixWithOthers, .duckOthers])
+            try audioSession.setCategory(
+                .playback,
+                mode: .spokenAudio,
+                options: []
+            )
             try audioSession.setActive(true)
 
+            stopSpeaking()
+
+            let utterance = AVSpeechUtterance(string: text)
+
+            speechSynthesizer.delegate = self
+
             logger.info("Configured audio session for text-to-speech")
-            audioPlayer?.play()
-            logger.info("Started text-to-speech playback")
+            speechSynthesizer.speak(utterance)
+            isSpeaking = true
+            logger.info("Started speaking text: \(text)")
+
         } catch {
             logger.error("Failed to configure text-to-speech: \(error.localizedDescription)")
+        }
+    }
+
+    func stopSpeaking() {
+        if speechSynthesizer.isSpeaking {
+            speechSynthesizer.stopSpeaking(at: .immediate)
+            isSpeaking = false
+            logger.info("Stopped speaking")
         }
     }
 
@@ -273,4 +327,31 @@ class AudioSessionController: ObservableObject {
              throw ConfigurationError.audioModeNotEnabled
          }
      }
+}
+
+extension AudioSessionController: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        isSpeaking = true
+        logger.info("Speech started")
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        isSpeaking = false
+        logger.info("Speech finished")
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
+        isSpeaking = false
+        logger.info("Speech paused")
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didContinue utterance: AVSpeechUtterance) {
+        isSpeaking = true
+        logger.info("Speech continued")
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        isSpeaking = false
+        logger.info("Speech cancelled")
+    }
 }

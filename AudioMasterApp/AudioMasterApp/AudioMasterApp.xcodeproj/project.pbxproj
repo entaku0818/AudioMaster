@@ -13,7 +13,7 @@
 		610CAA372BF8D63D00C06EEC /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610CAA362BF8D63D00C06EEC /* MetalViewController.swift */; };
 		610CAA392BF8D72B00C06EEC /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 610CAA382BF8D72B00C06EEC /* Shader.metal */; };
 		610CAA3C2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610CAA3B2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift */; };
-		6112044A2D03E83500215F43 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611204492D03E83500215F43 /* AudioManager.swift */; };
+		6112044A2D03E83500215F43 /* AudioSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611204492D03E83500215F43 /* AudioSessionController.swift */; };
 		6112044D2D03E8E200215F43 /* AudioSessionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6112044C2D03E8E200215F43 /* AudioSessionDemoView.swift */; };
 		6112044F2D03ECA700215F43 /* sfc-harukanaru-daichi_Loop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6112044E2D03ECA700215F43 /* sfc-harukanaru-daichi_Loop.mp3 */; };
 		6115A0BE2CD70DA700554C0F /* AVAudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6115A0BD2CD70DA700554C0F /* AVAudioSession.swift */; };
@@ -75,7 +75,7 @@
 		610CAA362BF8D63D00C06EEC /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
 		610CAA382BF8D72B00C06EEC /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 		610CAA3B2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeAudioRecorder.swift; sourceTree = "<group>"; };
-		611204492D03E83500215F43 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		611204492D03E83500215F43 /* AudioSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSessionController.swift; sourceTree = "<group>"; };
 		6112044C2D03E8E200215F43 /* AudioSessionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSessionDemoView.swift; sourceTree = "<group>"; };
 		6112044E2D03ECA700215F43 /* sfc-harukanaru-daichi_Loop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sfc-harukanaru-daichi_Loop.mp3"; sourceTree = "<group>"; };
 		6115A0BD2CD70DA700554C0F /* AVAudioSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAudioSession.swift; sourceTree = "<group>"; };
@@ -182,7 +182,7 @@
 		6112044B2D03E8CF00215F43 /* AudioSesstion */ = {
 			isa = PBXGroup;
 			children = (
-				611204492D03E83500215F43 /* AudioManager.swift */,
+				611204492D03E83500215F43 /* AudioSessionController.swift */,
 				6112044C2D03E8E200215F43 /* AudioSessionDemoView.swift */,
 			);
 			path = AudioSesstion;
@@ -422,7 +422,7 @@
 				6115A0BE2CD70DA700554C0F /* AVAudioSession.swift in Sources */,
 				6100F2132BB4F437005AA35D /* CameraPreview.swift in Sources */,
 				61CFB6E32BC587C100849C47 /* PiPVideoPlayerView.swift in Sources */,
-				6112044A2D03E83500215F43 /* AudioManager.swift in Sources */,
+				6112044A2D03E83500215F43 /* AudioSessionController.swift in Sources */,
 				610CAA3C2BF8D87F00C06EEC /* RealTimeAudioRecorder.swift in Sources */,
 				61B15DB82BC1472B0009EB6A /* WhisperKitView.swift in Sources */,
 				615702652B8873C700096E5F /* VolumeVisualizerView.swift in Sources */,
